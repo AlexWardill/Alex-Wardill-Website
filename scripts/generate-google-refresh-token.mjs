@@ -154,7 +154,11 @@ async function run() {
   let code;
   try {
     code = await waitForAuthorizationCode();
-  } catch {
+  } catch (error) {
+    console.error(`Auto-callback failed: ${error.message}`);
+    if (!process.stdin.isTTY) {
+      throw new Error('Cannot prompt for auth code in non-interactive terminal. Re-run in your local terminal after opening the auth URL.');
+    }
     const rl = readline.createInterface({ input, output });
     code = await rl.question('Could not auto-capture callback. Paste the authorization code: ');
     rl.close();
