@@ -25,6 +25,8 @@ Set these in **Repository settings > Secrets and variables > Actions**:
 - `GOOGLE_OAUTH_CREDENTIALS_JSON` (or `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET`)
 - `GOOGLE_CALENDAR_ID` (recommended for stability)
 
+You do not need to upload your downloaded credentials JSON file into the repository. If needed, paste its JSON content into the `GOOGLE_OAUTH_CREDENTIALS_JSON` secret.
+
 ## Important security rules
 
 - Never commit your Google credentials JSON file to git.
@@ -33,9 +35,9 @@ Set these in **Repository settings > Secrets and variables > Actions**:
 
 ## One-time manual test
 
-1. Trigger `Sync gigs from Google Calendar` workflow with **Run workflow**.
-2. Review generated PR into `develop`.
-3. Merge to `develop` if correct.
+1. Trigger `Sync gigs from Google Calendar` workflow with **Run workflow** and keep `dry_run` enabled.
+2. Review workflow logs to confirm parsed gigs and dates.
+3. Run it again with `dry_run` disabled to generate/update the PR into `develop`.
 4. Open PR from `develop` -> `production` and merge after review.
 
 ## Notes

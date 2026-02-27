@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "sync:gigs": "node scripts/sync-gigs-from-calendar.mjs"
+    "sync:gigs": "node scripts/sync-gigs-from-calendar.mjs",
+    "sync:gigs:dry-run": "node scripts/sync-gigs-from-calendar.mjs --dry-run"
   },
   "dependencies": {
     "googleapis": "^144.0.0"

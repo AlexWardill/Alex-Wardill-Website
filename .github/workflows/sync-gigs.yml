@@ -2,6 +2,12 @@ name: Sync gigs from Google Calendar
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Run in dry-run mode (no file edits, no PR)
+        required: true
+        default: true
+        type: boolean
   schedule:
     - cron: "0 8 * * *"
 
@@ -35,9 +41,16 @@ jobs:
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
           GOOGLE_CALENDAR_NAME: Gig
-        run: npm run sync:gigs
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+        run: |
+          if [ "${DRY_RUN}" = "true" ]; then
+            npm run sync:gigs:dry-run
+          else
+            npm run sync:gigs
+          fi
 
       - name: Create pull request to develop
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
         uses: peter-evans/create-pull-request@v6
         with:
           branch: automation/gigs-sync

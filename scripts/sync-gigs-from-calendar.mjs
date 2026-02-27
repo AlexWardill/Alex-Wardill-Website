@@ -5,6 +5,7 @@ import { google } from 'googleapis';
 
 const WEBSITE_ROOT = process.cwd();
 const GIGS_HTML_PATH = path.join(WEBSITE_ROOT, 'gigs.html');
+const isDryRun = process.argv.includes('--dry-run') || process.env.DRY_RUN === 'true';
 
 function ordinal(day) {
   if (day > 3 && day < 21) return 'th';
@@ -128,6 +129,14 @@ async function run() {
       };
     })
     .filter(Boolean);
+
+  if (isDryRun) {
+    console.log(`Dry run: found ${events.length} upcoming gigs from calendar '${calendarId}'.`);
+    events.forEach((event, index) => {
+      console.log(`${index + 1}. ${event.gigDate} | ${event.venue} | ${event.ticketLink || 'no ticket link'}`);
+    });
+    return;
+  }
 
   const upcomingMarkup = events.length
     ? events
