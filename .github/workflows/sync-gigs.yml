@@ -1,0 +1,66 @@
+name: Sync gigs from Google Calendar
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Run in dry-run mode (no file edits, no PR)
+        required: true
+        default: true
+        type: boolean
+  schedule:
+    - cron: "0 8 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-gigs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout develop
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Sync gigs from calendar
+        env:
+          GOOGLE_OAUTH_CREDENTIALS_JSON: ${{ secrets.GOOGLE_OAUTH_CREDENTIALS_JSON }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
+          GOOGLE_CALENDAR_NAME: Gig
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+        run: |
+          if [ "${DRY_RUN}" = "true" ]; then
+            npm run sync:gigs:dry-run
+          else
+            npm run sync:gigs
+          fi
+
+      - name: Create pull request to develop
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: automation/gigs-sync
+          base: develop
+          commit-message: "chore: sync upcoming gigs from Google Calendar"
+          title: "chore: sync upcoming gigs from Google Calendar"
+          body: |
+            Automated update from Google Calendar "Gig".
+
+            - Uses event title as venue
+            - Uses event date as gig date
+            - Uses first URL in description as ticket link (if present)
+          labels: automated

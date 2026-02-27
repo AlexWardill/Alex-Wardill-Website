@@ -1,0 +1,13 @@
+{
+  "name": "alex-wardill-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:gigs": "node scripts/sync-gigs-from-calendar.mjs",
+    "sync:gigs:dry-run": "node scripts/sync-gigs-from-calendar.mjs --dry-run",
+    "auth:google:refresh-token": "node scripts/generate-google-refresh-token.mjs"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}
