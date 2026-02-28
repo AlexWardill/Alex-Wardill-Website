@@ -14,8 +14,6 @@ Anything outside these markers is left untouched.
 ## Branch safety model
 
 - `production`: protected live branch (GitHub Pages should deploy from this branch only)
-- `develop`: integration branch
-- `feature/google-calendar-sync`: implementation branch
 - `automation/gigs-sync`: bot PR branch used by workflow
 
 ## Data mapping
@@ -73,18 +71,18 @@ Optional: if you use GitHub CLI and are logged in, store it automatically:
 
 1. Trigger `Sync gigs from Google Calendar` workflow with **Run workflow** and keep `dry_run` enabled.
 2. Review workflow logs to confirm parsed gigs and dates.
-3. Run it again with `dry_run` disabled to generate/update the PR into `develop`.
-4. Open PR from `develop` -> `production` and merge after review.
+3. Run it again with `dry_run` disabled to generate/update the PR into `production`.
+4. Review and merge the automation PR into `production`.
 
 ## If local dry-run is unstable
 
 If running `npm run sync:gigs:dry-run` locally crashes your editor/session, prefer testing with **workflow_dispatch** in GitHub Actions.
 
 - `dry_run: true` validates API access and parsing without changing files.
-- `dry_run: false` opens/updates the automation PR into `develop`.
-- Only merge `develop` -> `production` (or your live branch) after review.
+- `dry_run: false` opens/updates the automation PR into `production`.
+- Only merge into `production` (or your live branch) after review.
 
 ## Notes
 
 - Scheduled workflows run from the repository default branch workflow file.
-- If your default branch is not `develop`, the schedule will still run and checkout `develop` as configured.
+- The workflow checks out and opens PRs against `production` as configured.

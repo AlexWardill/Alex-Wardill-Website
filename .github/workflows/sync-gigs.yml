@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout develop
+      - name: Checkout production
         uses: actions/checkout@v4
         with:
-          ref: develop
+          ref: production
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -51,12 +51,12 @@ jobs:
             npm run sync:gigs
           fi
 
-      - name: Create pull request to develop
+      - name: Create pull request to production
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
         uses: peter-evans/create-pull-request@v6
         with:
           branch: automation/gigs-sync
-          base: develop
+          base: production
           commit-message: "chore: sync gigs from Google Calendar"
           title: "chore: sync gigs from Google Calendar"
           body: |
