@@ -290,6 +290,36 @@ body {
     width: 100%;
 }
 
+@media (max-width: 768px) {
+    .gigs-section:not(.gigs-section-alt) .gigs-list {
+        gap: 1.25rem;
+    }
+
+    .gigs-section:not(.gigs-section-alt) .gig-item {
+        padding: 1.1rem;
+    }
+
+    .gigs-section .gig-venue {
+        font-size: 1.1rem;
+    }
+
+    .gigs-section .gig-date {
+        font-size: 0.9rem;
+    }
+
+    .gigs-list-previous .gig-item-simple {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .gigs-list-previous .gig-item-simple .gig-date {
+        margin-left: 0;
+        text-align: left;
+        white-space: normal;
+    }
+}
+
 .gig-item {
     padding: 1.5rem;
     border: 1px solid #333;
