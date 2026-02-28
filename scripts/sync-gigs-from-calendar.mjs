@@ -4,7 +4,7 @@ import process from 'node:process';
 import { google } from 'googleapis';
 
 const WEBSITE_ROOT = process.cwd();
-const GIGS_HTML_PATH = path.join(WEBSITE_ROOT, 'gigs.html');
+const GIGS_HTML_PATH = path.join(WEBSITE_ROOT, 'gigs', 'index.html');
 const UPCOMING_GIGS_START_MARKER = '<!-- upcoming-gigs:auto:start -->';
 const UPCOMING_GIGS_END_MARKER = '<!-- upcoming-gigs:auto:end -->';
 const PREVIOUS_GIGS_START_MARKER = '<!-- previous-gigs:auto:start -->';

@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Wardill - Photography</title>
-    <meta name="description" content="Photography portfolio by Alex Wardill featuring portraits, live gig photography, and creative galleries.">
+    <base href="/">
+    <title>Alex Wardill - Portraits</title>
+    <meta name="description" content="Portrait photography gallery by Alex Wardill featuring musicians and creative portrait work.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://alexwardill.com/photography/">
+    <link rel="canonical" href="https://alexwardill.com/gallery-portraits/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Alex Wardill">
-    <meta property="og:title" content="Alex Wardill - Photography">
-    <meta property="og:description" content="Explore portrait and live music photography galleries by Alex Wardill.">
-    <meta property="og:url" content="https://alexwardill.com/photography/">
+    <meta property="og:title" content="Alex Wardill - Portraits">
+    <meta property="og:description" content="Portrait photography gallery by Alex Wardill.">
+    <meta property="og:url" content="https://alexwardill.com/gallery-portraits/">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Alex Wardill - Photography">
-    <meta name="twitter:description" content="Explore portrait and live music photography galleries by Alex Wardill.">
+    <meta name="twitter:title" content="Alex Wardill - Portraits">
+    <meta name="twitter:description" content="Portrait photography gallery by Alex Wardill.">
     <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -38,35 +39,42 @@
         </div>
     </nav>
 
-    <!-- Gallery Section -->
-    <section class="photography-gallery-section">
-        <div class="photography-gallery-container">
-            <h2 class="gallery-title">Gallery</h2>
-            <div class="photography-grid">
-                <a href="/gallery-portraits/" class="gallery-card">
-                    <img src="images/Gallery/Portraits/carmen-bibi-079.jpg" alt="Portraits">
-                    <div class="gallery-card-title">Portraits</div>
-                </a>
-                <a href="/gallery-gigs-2026/" class="gallery-card">
-                    <img src="images/Gallery/Gigs 2026/orchard-jago-09.jpg" alt="Gigs 2026">
-                    <div class="gallery-card-title">Gigs 2026</div>
-                </a>
-                <a href="/gallery-gigs-2025/" class="gallery-card">
-                    <img src="images/Gallery/Gigs 2025/Lior-EFGColour-10.jpg" alt="Gigs 2025">
-                    <div class="gallery-card-title">Gigs 2025</div>
-                </a>
-                <a href="/gallery-siena/" class="gallery-card">
-                    <img src="images/Gallery/Siena/Sienav1-029.jpg" alt="Siena">
-                    <div class="gallery-card-title">Siena</div>
-                </a>
-                <a href="/gallery-other/" class="gallery-card">
-                    <img src="images/Gallery/Other/Tokyo - Crossing.jpg" alt="Other">
-                    <div class="gallery-card-title">Other</div>
-                </a>
-                
+    <!-- Photoshoot Section -->
+    <section class="photoshoot-section">
+        <div class="photoshoot-container">
+            <a href="/photography/" class="gallery-back-button">← Back to Photography</a>
+            <h1 class="photoshoot-title">Portraits</h1>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="images/Gallery/Portraits/banwen-13.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/banwen-37.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/banwen-46.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/banwen-53.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/carmen-bibi-025.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/carmen-bibi-045.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/carmen-bibi-049.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/carmen-bibi-077.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/carmen-bibi-079.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/jamie-03.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/jamie-25.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
+                <div class="gallery-item"><img src="images/Gallery/Portraits/jamie-31.jpg" alt="Photo" data-caption="" data-section="portraits" loading="lazy"></div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img id="lightbox-image" src="" alt="">
+        </div>
+        <div class="lightbox-section-caption">
+            <p id="lightbox-section">Photos</p>
+            <p id="lightbox-location"></p>
+        </div>
+        <button class="lightbox-prev">&lt;</button>
+        <button class="lightbox-next">&gt;</button>
+        <p id="lightbox-caption" class="lightbox-caption"></p>
+    </div>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -89,5 +97,6 @@
     </footer>
 
     <script src="js/shared.js" defer></script>
+    <script src="js/lightbox.js" defer></script>
 </body>
 </html>
