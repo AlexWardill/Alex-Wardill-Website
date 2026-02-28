@@ -1,4 +1,12 @@
 (() => {
+    const { pathname, search, hash } = window.location;
+    if (pathname.endsWith('.html')) {
+        const normalizedPath = pathname.endsWith('/index.html')
+            ? pathname.slice(0, -'index.html'.length)
+            : `${pathname.slice(0, -'.html'.length)}/`;
+        window.history.replaceState({}, '', `${normalizedPath}${search}${hash}`);
+    }
+
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link');

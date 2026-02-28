@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Wardill - Photography</title>
-    <meta name="description" content="Photography portfolio by Alex Wardill featuring portraits, live gig photography, and creative galleries.">
+    <base href="/">
+    <title>Alex Wardill - Contact</title>
+    <meta name="description" content="Contact Alex Wardill for live performances, collaborations, sessions, and photography enquiries.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://alexwardill.com/photography/">
+    <link rel="canonical" href="https://alexwardill.com/contact/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Alex Wardill">
-    <meta property="og:title" content="Alex Wardill - Photography">
-    <meta property="og:description" content="Explore portrait and live music photography galleries by Alex Wardill.">
-    <meta property="og:url" content="https://alexwardill.com/photography/">
+    <meta property="og:title" content="Alex Wardill - Contact">
+    <meta property="og:description" content="Get in touch with Alex Wardill for music and photography enquiries.">
+    <meta property="og:url" content="https://alexwardill.com/contact/">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Alex Wardill - Photography">
-    <meta name="twitter:description" content="Explore portrait and live music photography galleries by Alex Wardill.">
+    <meta name="twitter:title" content="Alex Wardill - Contact">
+    <meta name="twitter:description" content="Get in touch with Alex Wardill for music and photography enquiries.">
     <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -38,33 +39,33 @@
         </div>
     </nav>
 
-    <!-- Gallery Section -->
-    <section class="photography-gallery-section">
-        <div class="photography-gallery-container">
-            <h2 class="gallery-title">Gallery</h2>
-            <div class="photography-grid">
-                <a href="/gallery-portraits/" class="gallery-card">
-                    <img src="images/Gallery/Portraits/carmen-bibi-079.jpg" alt="Portraits">
-                    <div class="gallery-card-title">Portraits</div>
-                </a>
-                <a href="/gallery-gigs-2026/" class="gallery-card">
-                    <img src="images/Gallery/Gigs 2026/orchard-jago-09.jpg" alt="Gigs 2026">
-                    <div class="gallery-card-title">Gigs 2026</div>
-                </a>
-                <a href="/gallery-gigs-2025/" class="gallery-card">
-                    <img src="images/Gallery/Gigs 2025/Lior-EFGColour-10.jpg" alt="Gigs 2025">
-                    <div class="gallery-card-title">Gigs 2025</div>
-                </a>
-                <a href="/gallery-siena/" class="gallery-card">
-                    <img src="images/Gallery/Siena/Sienav1-029.jpg" alt="Siena">
-                    <div class="gallery-card-title">Siena</div>
-                </a>
-                <a href="/gallery-other/" class="gallery-card">
-                    <img src="images/Gallery/Other/Tokyo - Crossing.jpg" alt="Other">
-                    <div class="gallery-card-title">Other</div>
-                </a>
-                
-            </div>
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <h1 class="contact-title">Get in Touch</h1>
+            <form class="contact-form" action="https://formspree.io/f/mkovqjqg" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
         </div>
     </section>
 
