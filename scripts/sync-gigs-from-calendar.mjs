@@ -238,10 +238,10 @@ async function run() {
   const upcomingMarkup = upcomingEvents.length
     ? upcomingEvents
         .map(
-          (event) => `                <div class="gig-item upcoming-gig" data-ticket-link="${escapeHtml(event.ticketLink)}">\n                    <div class="gig-venue">${escapeHtml(event.venue)}</div>\n                    <div class="gig-date">${escapeHtml(event.gigDate)}</div>\n                </div>`
+          (event) => `                <div class="gig-item upcoming-gig"${event.ticketLink ? ` data-ticket-link="${escapeHtml(event.ticketLink)}"` : ''}>\n                    <div class="gig-venue">${escapeHtml(event.venue)}</div>\n                    <div class="gig-date">${escapeHtml(event.gigDate)}</div>\n                </div>`
         )
         .join('\n')
-    : `                <div class="gig-item upcoming-gig" data-ticket-link="">\n                    <div class="gig-venue">No upcoming gigs currently listed</div>\n                    <div class="gig-date"></div>\n                </div>`;
+    : `                <div class="gig-item upcoming-gig">\n                    <div class="gig-venue">No upcoming gigs currently listed</div>\n                    <div class="gig-date"></div>\n                </div>`;
 
   const previousMarkup = previousEvents.length
     ? previousEvents
