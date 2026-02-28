@@ -31,7 +31,7 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Sync gigs from calendar
         env:
@@ -40,7 +40,9 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           GOOGLE_CALENDAR_ID: ${{ secrets.GOOGLE_CALENDAR_ID }}
-          GOOGLE_CALENDAR_NAME: Gig
+          GOOGLE_CALENDAR_NAME: ${{ vars.GOOGLE_CALENDAR_NAME || 'Gig' }}
+          GIGS_TIME_ZONE: ${{ vars.GIGS_TIME_ZONE || 'Europe/London' }}
+          GIGS_DATE_LOCALE: ${{ vars.GIGS_DATE_LOCALE || 'en-GB' }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
         run: |
           if [ "${DRY_RUN}" = "true" ]; then
@@ -55,12 +57,13 @@ jobs:
         with:
           branch: automation/gigs-sync
           base: develop
-          commit-message: "chore: sync upcoming gigs from Google Calendar"
-          title: "chore: sync upcoming gigs from Google Calendar"
+          commit-message: "chore: sync gigs from Google Calendar"
+          title: "chore: sync gigs from Google Calendar"
           body: |
             Automated update from Google Calendar "Gig".
 
             - Uses event title as venue
             - Uses event date as gig date
-            - Uses first URL in description as ticket link (if present)
+            - Uses event description as ticket link when present
+            - Splits into Upcoming vs Previous by event date
           labels: automated

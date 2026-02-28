@@ -5,7 +5,26 @@ import { google } from 'googleapis';
 
 const WEBSITE_ROOT = process.cwd();
 const GIGS_HTML_PATH = path.join(WEBSITE_ROOT, 'gigs.html');
-const isDryRun = process.argv.includes('--dry-run') || process.env.DRY_RUN === 'true';
+const UPCOMING_GIGS_START_MARKER = '<!-- upcoming-gigs:auto:start -->';
+const UPCOMING_GIGS_END_MARKER = '<!-- upcoming-gigs:auto:end -->';
+const PREVIOUS_GIGS_START_MARKER = '<!-- previous-gigs:auto:start -->';
+const PREVIOUS_GIGS_END_MARKER = '<!-- previous-gigs:auto:end -->';
+const LOCALE = process.env.GIGS_DATE_LOCALE ?? 'en-GB';
+const EVENT_TIME_ZONE = process.env.GIGS_TIME_ZONE ?? 'Europe/London';
+
+function isTruthy(value) {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value !== 'string') {
+    return false;
+  }
+
+  return ['1', 'true', 'yes', 'on'].includes(value.trim().toLowerCase());
+}
+
+const isDryRun = process.argv.includes('--dry-run') || isTruthy(process.env.DRY_RUN);
 
 function ordinal(day) {
   if (day > 3 && day < 21) return 'th';
@@ -24,7 +43,7 @@ function ordinal(day) {
 function formatGigDate(isoDate) {
   const date = new Date(`${isoDate}T00:00:00`);
   const day = date.getDate();
-  const month = date.toLocaleString('en-GB', { month: 'long' });
+  const month = date.toLocaleString(LOCALE, { month: 'long', timeZone: EVENT_TIME_ZONE });
   const year = date.getFullYear();
   return `${day}${ordinal(day)} ${month} ${year}`;
 }
@@ -41,9 +60,8 @@ function extractDate(event) {
   return null;
 }
 
-function extractFirstUrl(text = '') {
-  const match = text.match(/https?:\/\/[^\s)]+/i);
-  return match ? match[0] : '';
+function extractTicketLink(text = '') {
+  return text.trim();
 }
 
 function escapeHtml(text = '') {
@@ -85,13 +103,67 @@ async function resolveCalendarId(calendar) {
 
   const calendarName = process.env.GOOGLE_CALENDAR_NAME ?? 'Gig';
   const listResponse = await calendar.calendarList.list();
-  const entry = (listResponse.data.items ?? []).find((item) => item.summary === calendarName);
+  const entry = (listResponse.data.items ?? []).find((item) => item.summary?.toLowerCase() === calendarName.toLowerCase());
 
   if (!entry?.id) {
     throw new Error(`Calendar not found by name: ${calendarName}. Set GOOGLE_CALENDAR_ID to be explicit.`);
   }
 
   return entry.id;
+}
+
+function formatIsoDateInTimeZone(date, timeZone) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(date);
+
+  const year = parts.find((part) => part.type === 'year')?.value;
+  const month = parts.find((part) => part.type === 'month')?.value;
+  const day = parts.find((part) => part.type === 'day')?.value;
+
+  if (!year || !month || !day) {
+    throw new Error('Failed to format date in configured time zone.');
+  }
+
+  return `${year}-${month}-${day}`;
+}
+
+function replaceBetweenMarkers(html, startMarker, endMarker, markup, indent) {
+  if (!html.includes(startMarker) || !html.includes(endMarker)) {
+    throw new Error(`Missing markers: '${startMarker}' and '${endMarker}'.`);
+  }
+
+  const markerPattern = new RegExp(
+    `(${startMarker})([\\s\\S]*?)(${endMarker})`
+  );
+
+  return html.replace(markerPattern, `$1\n${markup}\n${indent}$3`);
+}
+
+async function listCalendarEvents(calendar, calendarId, timeMin, timeMax) {
+  const events = [];
+  let pageToken;
+
+  do {
+    const response = await calendar.events.list({
+      calendarId,
+      timeMin,
+      timeMax,
+      singleEvents: true,
+      orderBy: 'startTime',
+      maxResults: 2500,
+      timeZone: EVENT_TIME_ZONE,
+      pageToken,
+    });
+
+    events.push(...(response.data.items ?? []));
+    pageToken = response.data.nextPageToken;
+  } while (pageToken);
+
+  return events;
 }
 
 async function run() {
@@ -107,56 +179,99 @@ async function run() {
   const calendar = google.calendar({ version: 'v3', auth: authClient });
   const calendarId = await resolveCalendarId(calendar);
 
-  const eventsResponse = await calendar.events.list({
-    calendarId,
-    timeMin: new Date().toISOString(),
-    singleEvents: true,
-    orderBy: 'startTime',
-    maxResults: 20,
-  });
+  const now = new Date();
+  const todayIso = formatIsoDateInTimeZone(now, EVENT_TIME_ZONE);
+  const rangeStart = new Date(now);
+  rangeStart.setFullYear(rangeStart.getFullYear() - 5);
+  const rangeEnd = new Date(now);
+  rangeEnd.setFullYear(rangeEnd.getFullYear() + 5);
 
-  const events = (eventsResponse.data.items ?? [])
+  const eventsResponse = await listCalendarEvents(
+    calendar,
+    calendarId,
+    rangeStart.toISOString(),
+    rangeEnd.toISOString()
+  );
+
+  const events = eventsResponse
     .map((event) => {
+      if (event.status === 'cancelled') {
+        return null;
+      }
+
       const isoDate = extractDate(event);
-      if (!isoDate || !event.summary) {
+      const summary = event.summary?.trim();
+      if (!isoDate || !summary) {
         return null;
       }
 
       return {
-        venue: event.summary.trim(),
+        isoDate,
+        venue: summary,
         gigDate: formatGigDate(isoDate),
-        ticketLink: extractFirstUrl(event.description ?? ''),
+        ticketLink: extractTicketLink(event.description ?? ''),
       };
     })
     .filter(Boolean);
 
+  const upcomingEvents = events
+    .filter((event) => event.isoDate >= todayIso)
+    .sort((left, right) => left.isoDate.localeCompare(right.isoDate));
+
+  const previousEvents = events
+    .filter((event) => event.isoDate < todayIso)
+    .sort((left, right) => right.isoDate.localeCompare(left.isoDate));
+
   if (isDryRun) {
-    console.log(`Dry run: found ${events.length} upcoming gigs from calendar '${calendarId}'.`);
-    events.forEach((event, index) => {
-      console.log(`${index + 1}. ${event.gigDate} | ${event.venue} | ${event.ticketLink || 'no ticket link'}`);
+    console.log(`Dry run: found ${events.length} gigs in calendar '${calendarId}'.`);
+    console.log(`- Upcoming gigs: ${upcomingEvents.length}`);
+    console.log(`- Previous gigs: ${previousEvents.length}`);
+    upcomingEvents.forEach((event, index) => {
+      console.log(`UPCOMING ${index + 1}. ${event.gigDate} | ${event.venue} | ${event.ticketLink || 'no ticket link'}`);
+    });
+    previousEvents.forEach((event, index) => {
+      console.log(`PREVIOUS ${index + 1}. ${event.gigDate} | ${event.venue}`);
     });
     return;
   }
 
-  const upcomingMarkup = events.length
-    ? events
+  const upcomingMarkup = upcomingEvents.length
+    ? upcomingEvents
         .map(
           (event) => `                <div class="gig-item upcoming-gig" data-ticket-link="${escapeHtml(event.ticketLink)}">\n                    <div class="gig-venue">${escapeHtml(event.venue)}</div>\n                    <div class="gig-date">${escapeHtml(event.gigDate)}</div>\n                </div>`
         )
         .join('\n')
     : `                <div class="gig-item upcoming-gig" data-ticket-link="">\n                    <div class="gig-venue">No upcoming gigs currently listed</div>\n                    <div class="gig-date"></div>\n                </div>`;
 
+  const previousMarkup = previousEvents.length
+    ? previousEvents
+        .map(
+          (event) => `                <div class="gig-item gig-item-simple">\n                    <div class="gig-venue">${escapeHtml(event.venue)}</div>\n                    <div class="gig-date">${escapeHtml(event.gigDate)}</div>\n                </div>`
+        )
+        .join('\n')
+    : `                <div class="gig-item gig-item-simple">\n                    <div class="gig-venue">No previous gigs currently listed</div>\n                    <div class="gig-date"></div>\n                </div>`;
+
   const html = await fs.readFile(GIGS_HTML_PATH, 'utf8');
 
-  const pattern = /(<h1 class="gigs-title">Upcoming Gigs<\/h1>\s*<div class="gigs-list">)([\s\S]*?)(\s*<\/div>\s*<\/div>\s*<\/section>)/;
-  if (!pattern.test(html)) {
-    throw new Error('Could not find Upcoming Gigs block in gigs.html.');
-  }
+  const updatedUpcoming = replaceBetweenMarkers(
+    html,
+    UPCOMING_GIGS_START_MARKER,
+    UPCOMING_GIGS_END_MARKER,
+    upcomingMarkup,
+    '                '
+  );
 
-  const updated = html.replace(pattern, `$1\n${upcomingMarkup}$3`);
+  const updated = replaceBetweenMarkers(
+    updatedUpcoming,
+    PREVIOUS_GIGS_START_MARKER,
+    PREVIOUS_GIGS_END_MARKER,
+    previousMarkup,
+    '                '
+  );
+
   await fs.writeFile(GIGS_HTML_PATH, updated, 'utf8');
 
-  console.log(`Synced ${events.length} upcoming gigs from calendar '${calendarId}'.`);
+  console.log(`Synced gigs from calendar '${calendarId}'. Upcoming: ${upcomingEvents.length}, Previous: ${previousEvents.length}.`);
 }
 
 run().catch((error) => {
