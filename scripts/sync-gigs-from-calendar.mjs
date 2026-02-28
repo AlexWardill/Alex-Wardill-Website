@@ -61,7 +61,29 @@ function extractDate(event) {
 }
 
 function extractTicketLink(text = '') {
-  return text.trim();
+  const value = text.trim();
+  if (!value) {
+    return '';
+  }
+
+  const hrefMatch = value.match(/href\s*=\s*["']([^"']+)["']/i);
+  const urlMatch = value.match(/https?:\/\/[^\s<>'"]+/i);
+  const candidate = hrefMatch?.[1]?.trim() ?? urlMatch?.[0]?.trim() ?? '';
+
+  if (!candidate) {
+    return '';
+  }
+
+  try {
+    const parsed = new URL(candidate);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+      return parsed.toString();
+    }
+  } catch {
+    return '';
+  }
+
+  return '';
 }
 
 function escapeHtml(text = '') {
