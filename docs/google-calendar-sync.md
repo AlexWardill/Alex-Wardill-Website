@@ -82,6 +82,17 @@ If running `npm run sync:gigs:dry-run` locally crashes your editor/session, pref
 - `dry_run: false` opens/updates the automation PR into `production`.
 - Only merge into `production` (or your live branch) after review.
 
+## Troubleshooting: refresh token failures
+
+If Actions logs show `invalid_grant` with `Token has been expired or revoked`, the `GOOGLE_REFRESH_TOKEN` secret is no longer valid.
+
+1. Re-generate token locally:
+	- `npm install`
+	- `npm run auth:google:refresh-token -- --credentials "C:/path/to/your-client-secret.json"`
+2. Replace GitHub secret `GOOGLE_REFRESH_TOKEN` with the new value (no quotes, no extra spaces/new lines).
+3. Ensure the OAuth client used in Actions (`GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` or `GOOGLE_OAUTH_CREDENTIALS_JSON`) is the same client that minted the new token.
+4. Run workflow with `dry_run: true` to verify API auth before normal runs.
+
 ## Notes
 
 - Scheduled workflows run from the repository default branch workflow file.

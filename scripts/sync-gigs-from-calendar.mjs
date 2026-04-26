@@ -12,6 +12,27 @@ const PREVIOUS_GIGS_END_MARKER = '<!-- previous-gigs:auto:end -->';
 const LOCALE = process.env.GIGS_DATE_LOCALE ?? 'en-GB';
 const EVENT_TIME_ZONE = process.env.GIGS_TIME_ZONE ?? 'Europe/London';
 
+function getNormalizedSecret(name) {
+  const value = process.env[name];
+  if (typeof value !== 'string') {
+    return '';
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return '';
+  }
+
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    return trimmed.slice(1, -1).trim();
+  }
+
+  return trimmed;
+}
+
 function isTruthy(value) {
   if (typeof value === 'boolean') {
     return value;
@@ -96,8 +117,8 @@ function escapeHtml(text = '') {
 }
 
 function getCredentialsFromEnv() {
-  const clientId = process.env.GOOGLE_CLIENT_ID;
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const clientId = getNormalizedSecret('GOOGLE_CLIENT_ID');
+  const clientSecret = getNormalizedSecret('GOOGLE_CLIENT_SECRET');
 
   if (clientId && clientSecret) {
     return { clientId, clientSecret };
@@ -189,7 +210,7 @@ async function listCalendarEvents(calendar, calendarId, timeMin, timeMax) {
 }
 
 async function run() {
-  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
+  const refreshToken = getNormalizedSecret('GOOGLE_REFRESH_TOKEN');
   if (!refreshToken) {
     throw new Error('Missing GOOGLE_REFRESH_TOKEN.');
   }
@@ -297,6 +318,23 @@ async function run() {
 }
 
 run().catch((error) => {
-  console.error(error);
+  const oauthError = error?.response?.data?.error;
+  const oauthDescription = error?.response?.data?.error_description;
+
+  if (oauthError === 'invalid_grant') {
+    console.error('Google rejected GOOGLE_REFRESH_TOKEN: token is expired, revoked, malformed, or tied to different OAuth client credentials.');
+    if (oauthDescription) {
+      console.error(`Details: ${oauthDescription}`);
+    }
+    console.error('Fix: generate a new token with `npm run auth:google:refresh-token -- --credentials "<path-to-client-secret.json>"` and update GitHub secret GOOGLE_REFRESH_TOKEN.');
+  } else if (oauthError === 'invalid_client') {
+    console.error('Google rejected OAuth client credentials. Verify GOOGLE_CLIENT_ID/GOOGLE_CLIENT_SECRET (or GOOGLE_OAUTH_CREDENTIALS_JSON) match the client used to mint the refresh token.');
+    if (oauthDescription) {
+      console.error(`Details: ${oauthDescription}`);
+    }
+  } else {
+    console.error(error);
+  }
+
   process.exit(1);
 });
