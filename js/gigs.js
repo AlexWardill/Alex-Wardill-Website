@@ -69,7 +69,7 @@
                         '@type': 'Place',
                         name: getGigLocation(venueText),
                     },
-                    url: 'https://alexwardill.com/gigs.html',
+                    url: 'https://alexwardill.com/gigs/',
                 };
 
                 if (ticketLink) {
@@ -93,7 +93,7 @@
                 {
                     '@type': 'CollectionPage',
                     name: 'Alex Wardill - Gigs',
-                    url: 'https://alexwardill.com/gigs.html',
+                    url: 'https://alexwardill.com/gigs/',
                     hasPart: events,
                 },
             ],
