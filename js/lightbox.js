@@ -18,6 +18,7 @@
     let imageData = {};
 
     const sectionDisplayNames = {
+        photography: 'Photography',
         photos_of_me: 'Photos of Me',
         photos_by_me: 'Photos by Me',
         gigs_2025: 'Gigs 2025',
@@ -42,13 +43,17 @@
         const currentImage = galleryItems[currentIndex];
         const section = currentImage.getAttribute('data-section') || '';
         const imageName = currentImage.getAttribute('src')?.split('/').pop() || '';
+        const dataSection = section === 'photography' ? 'photography' : section;
 
         lightboxImage.src = currentImage.src;
         lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
-        lightboxSection.textContent = sectionDisplayNames[section] || 'Photos';
+        lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
 
-        if (imageData[section] && imageData[section][imageName]) {
-            lightboxLocation.innerHTML = imageData[section][imageName].replace(/\n/g, '<br>');
+        const matchingData = imageData[dataSection]
+            || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
+
+        if (matchingData && matchingData[imageName]) {
+            lightboxLocation.innerHTML = matchingData[imageName].replace(/\n/g, '<br>');
         } else {
             lightboxLocation.textContent = '';
         }

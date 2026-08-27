@@ -48,9 +48,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="home-page">
     <!-- Navigation Bar -->
-    <nav class="navbar">
+    <nav class="navbar home-navbar">
         <div class="nav-container">
             <div class="nav-logo"><a href="/">Alex Wardill</a></div>
             <button class="hamburger" id="hamburger">
@@ -68,122 +68,91 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Alex Wardill</h1>
-            <p class="hero-subtitle">Musician & Photographer</p>
-            <p class="hero-text">
-                Woodwind multi-instrumentalist based in London, currently studying at The Guildhall School of Music and Drama on the Artist Masters Program. Alex has a background in Jazz and has performing and studio experience including pop, musical theatre, neo-soul, improvised music, and Colombian music.
-            </p>
-            <p class="hero-text">
- Alex is also a portrait and event photographer. As a musician himself, he understands the importance of professional images and enjoys meeting new musicians and learning about them and their music.
-            </p>
-            <a href="/contact/" class="hero-button">Get in Touch</a>
-        </div>
-    </section>
+    <main class="home-main">
+        <section id="home" class="home-hero">
+            <div class="home-hero-inner">
+                <h1 class="home-title">Alex Wardill</h1>
+                <img class="home-portrait" src="images/photos_of_me/000012410026.webp" alt="Alex Wardill portrait" loading="eager">
+                <p class="home-bio">
+                    Alex Wardill is a London-based woodwind multi-instrumentalist, photographer, and creative collaborator.
+                    He performs across jazz, improvised music, pop, musical theatre, and Colombian-inspired rhythms,
+                    while also creating portrait and live-event work shaped by the same instinct for atmosphere and character.
+                </p>
+            </div>
+        </section>
 
-    <!-- Gallery Section -->
-    <section id="photography" class="gallery-section">
-        <h2 class="gallery-title">Portfolio Gallery</h2>
-        
-        <!-- Divider -->
-        <div class="gallery-divider"></div>
-        
-        <!-- Photos of Me -->
-        <h3 class="gallery-subtitle">Photos of Me</h3>
-        <div class="gallery-grid">
-            <div class="gallery-item portrait">
-                <img src="images/photos_of_me/000012410026.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
+        <section class="home-gigs">
+            <div class="home-section-heading">
+                <h2>Upcoming Gigs</h2>
             </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_of_me/Cwood_Studios.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
+            <div class="home-gigs-list">
+                <a class="home-gig-item home-gig-link" href="https://www.vortexjazz.co.uk/event/london-jazz-orchestra-vortex-sessions-coltrane-at-100-africabrass/" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">London Jazz Orchestra Coltrane At 100 @ Vortex Jazz Club</span>
+                    <span class="home-gig-date">September 6th</span>
+                </a>
+                <a class="home-gig-item home-gig-link" href="https://www.eventbrite.co.uk/e/evelyn-axton-tickets-1992716052355?aff=oddtdtcreator&keep_tld=true" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">Evelyn Acton @ St Pancras Clock Tower</span>
+                    <span class="home-gig-date">September 13th</span>
+                </a>
+                <div class="home-gig-item">
+                    <span class="home-gig-venue">Sara Dhillon @ Vortex Jazz Club</span>
+                    <span class="home-gig-date">24th September</span>
+                </div>
+                <a class="home-gig-item home-gig-link" href="https://riversidestudios.co.uk/whats-on/uql-between-rivers/" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">Mako @ Riverside Studios</span>
+                    <span class="home-gig-date">26th September</span>
+                </a>
+                <a class="home-gig-item home-gig-link" href="https://phoenixartsclub.com/events/our-day-will-come-an-afternoon-of-jazz-soul-and-funk" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">Our Day Will Come: An Afternoon of Jazz, soul and Funk @ Phoenix Arts Club</span>
+                    <span class="home-gig-date">4th October</span>
+                </a>
+                <a class="home-gig-item home-gig-link" href="https://www.ronniescotts.co.uk/find-a-show/late-late-show-upstairs-miles-pillinger" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">Late Late Show Upstairs With Miles Pillinger</span>
+                    <span class="home-gig-date">20th October</span>
+                </a>
+                <div class="home-gig-item">
+                    <span class="home-gig-venue">Ruta Di "Onwards &amp; Upwards" Album Launch @ Jazz Cafe Posk</span>
+                    <span class="home-gig-date">24th October</span>
+                </div>
+                <a class="home-gig-item home-gig-link" href="https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-mako" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">Mako @ Guildhall Jazz Festival</span>
+                    <span class="home-gig-date">18th November</span>
+                </a>
+                <a class="home-gig-item home-gig-link" href="https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-the-hornsmen-of-the-apocalypse-big-band" target="_blank" rel="noopener noreferrer">
+                    <span class="home-gig-venue">The Hornsmen Of The Apocalypse @ Guildhall Jazz Festival</span>
+                    <span class="home-gig-date">21st November</span>
+                </a>
             </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_of_me/DUBB-LUBB.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_of_me/Esk-Finsbury_Clarinet_Below.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_of_me/Esk-Finsbury_Sax_Below.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_of_me/Florence_Headshot_3.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_of_me/IMG_0949.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_of_me/Interchanges-Tenor_Group_Side.webp" alt="Photo" data-caption="" data-section="photos_of_me" loading="lazy">
-            </div>
-        </div>
+        </section>
 
-        <!-- Divider -->
-        <div class="gallery-divider"></div>
+        <section class="home-photography" id="photography">
+            <div class="home-section-heading">
+                <h2>Photography</h2>
+            </div>
+            <div class="gallery-grid home-gallery-grid">
+                <div class="gallery-item landscape">
+                    <img src="images/photos_by_me/DUBB__2025-7.webp" alt="Performance" data-caption="" data-section="photography" loading="lazy">
+                </div>
+                <div class="gallery-item portrait">
+                    <img src="images/photos_by_me/jem_sisterkind-08.webp" alt="Live music" data-caption="" data-section="photography" loading="lazy">
+                </div>
+                <div class="gallery-item portrait">
+                    <img src="images/photos_by_me/Sienav1-002.webp" alt="Siena workshop" data-caption="" data-section="photography" loading="lazy">
+                </div>
+                <div class="gallery-item landscape">
+                    <img src="images/photos_by_me/Ryans_Dream_Edit_4.webp" alt="Portrait session" data-caption="" data-section="photography" loading="lazy">
+                </div>
+            </div>
+        </section>
+    </main>
 
-        <!-- Photos by Me -->
-        <h3 class="gallery-subtitle">Photos by Me</h3>
-        <div class="gallery-grid">
-            <div class="gallery-item landscape">
-                <img src="images/photos_by_me/DUBB__2025-7.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Ed_LF_Quartet-2.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Ed_LF_Quartet-3.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_by_me/jem_sisterkind-08.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Ryans_Dream_Edit_4.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_by_me/Sienav1-002.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Sienav1-027.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Sienav1-056.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_by_me/Sienav1-067.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Sienav1-072.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_by_me/Sienav1-086.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Sienav1-100.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Sienav1-103.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item landscape">
-                <img src="images/photos_by_me/Sienav1-108.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-            <div class="gallery-item portrait">
-                <img src="images/photos_by_me/Sienav1-115.webp" alt="Photo" data-caption="" data-section="photos_by_me" loading="lazy">
-            </div>
-        </div>
-        <div class="gallery-preview-more">
-            <a href="/photography/" class="hero-button">See more</a>
-        </div>
-    </section>
-
-    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <div class="lightbox-content">
             <button class="lightbox-close">&times;</button>
             <img id="lightbox-image" src="" alt="">
         </div>
         <div class="lightbox-section-caption">
-            <p id="lightbox-section">Photos of Me</p>
+            <p id="lightbox-section">Photography</p>
             <p id="lightbox-location"></p>
         </div>
         <button class="lightbox-prev">&lt;</button>
