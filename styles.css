@@ -199,7 +199,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.08em;
+    bottom: -0.04em;
     width: 0;
     height: 2px;
     background: var(--accent);
@@ -260,7 +260,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.08em;
+    bottom: -0.04em;
     width: 0;
     height: 2px;
     background: var(--accent);
@@ -402,7 +402,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.18em;
+    bottom: -0.12em;
     width: 0;
     height: 2px;
     background: var(--accent);
@@ -560,7 +560,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.08em;
+    bottom: -0.04em;
     width: 0;
     height: 2px;
     background: var(--accent);
@@ -661,7 +661,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.08em;
+    bottom: -0.04em;
     width: 0;
     height: 2px;
     background: var(--accent);
@@ -958,7 +958,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.08em;
+    bottom: -0.04em;
     width: 0;
     height: 2px;
     background: var(--accent);
@@ -1162,7 +1162,7 @@ body,
     content: "";
     position: absolute;
     left: 0;
-    bottom: -0.08em;
+    bottom: -0.04em;
     width: 0;
     height: 2px;
     background: var(--accent);
