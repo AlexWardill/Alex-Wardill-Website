@@ -200,17 +200,15 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.08em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
 .home-title:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
@@ -263,18 +261,16 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.08em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
 .home-section-heading h2:hover::after,
 .home-section-heading .home-section-link:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
@@ -407,12 +403,10 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.18em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
@@ -421,7 +415,7 @@ body,
 }
 
 .nav-link:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
@@ -567,17 +561,15 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.08em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
 .about-title:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
@@ -670,17 +662,15 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.08em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
 .gigs-title:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
@@ -969,17 +959,15 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.08em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
 .gallery-title:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
@@ -1175,17 +1163,15 @@ body,
     position: absolute;
     left: 0;
     bottom: -0.08em;
-    width: 100%;
+    width: 0;
     height: 2px;
     background: var(--accent);
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 0.28s ease, opacity 0.2s ease;
+    transition: width 0.28s ease, opacity 0.2s ease;
     opacity: 0;
 }
 
 .contact-title:hover::after {
-    transform: scaleX(1);
+    width: 100%;
     opacity: 1;
 }
 
