@@ -245,16 +245,20 @@ body,
     text-align: center;
 }
 
-.home-section-heading h2 {
+.home-section-heading h2,
+.home-section-heading .home-section-link {
     color: #111111;
     font-size: clamp(2rem, 3vw, 2.8rem);
     letter-spacing: -0.04em;
     font-weight: 700;
     display: inline-block;
     position: relative;
+    text-decoration: none;
+    font-family: 'Inconsolata', monospace;
 }
 
-.home-section-heading h2::after {
+.home-section-heading h2::after,
+.home-section-heading .home-section-link::after {
     content: "";
     position: absolute;
     left: 0;
@@ -268,7 +272,8 @@ body,
     opacity: 0;
 }
 
-.home-section-heading h2:hover::after {
+.home-section-heading h2:hover::after,
+.home-section-heading .home-section-link:hover::after {
     transform: scaleX(1);
     opacity: 1;
 }
