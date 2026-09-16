@@ -3,14 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "sync:gigs": "node scripts/sync-gigs-from-calendar.mjs",
-    "sync:gigs:dry-run": "node scripts/sync-gigs-from-calendar.mjs --dry-run",
-    "auth:google:refresh-token": "node scripts/generate-google-refresh-token.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
     "optimize:images:dry-run": "node scripts/optimize-images.mjs --dry-run"
   },
   "dependencies": {
-    "googleapis": "^144.0.0",
     "sharp": "^0.34.4"
   }
 }

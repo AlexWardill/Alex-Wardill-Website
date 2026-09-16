@@ -12,7 +12,7 @@
 }
 
 body {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
     color: var(--text);
     background-color: #ffffff;
@@ -79,7 +79,7 @@ body,
 .home-page .home-gig-venue,
 .home-page .home-gig-date,
 .home-page .home-bio {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .home-page .nav-logo a,
@@ -252,7 +252,7 @@ body,
     display: inline-block;
     position: relative;
     text-decoration: none;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .home-section-heading h2::after,
@@ -307,9 +307,17 @@ body,
     line-height: 1.4;
 }
 
+.home-gig-venue {
+    flex: 1 1 auto;
+    text-align: left;
+}
+
 .home-gig-date {
     white-space: nowrap;
     opacity: 0.8;
+    flex-shrink: 0;
+    margin-left: auto;
+    text-align: right;
 }
 
 .home-gallery-grid {
@@ -335,12 +343,19 @@ body,
     }
 
     .home-gig-item {
-        flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .home-gig-venue,
+    .home-gig-date {
+        width: auto;
     }
 
     .home-gig-date {
-        white-space: normal;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .home-page .gallery-grid {
@@ -373,7 +388,7 @@ body,
     font-weight: bold;
     color: #111111;
     letter-spacing: -0.04em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .nav-logo a {
@@ -395,7 +410,7 @@ body,
     transition: color 0.3s ease;
     font-weight: 500;
     font-size: 1.1rem;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .nav-link::after {
@@ -472,7 +487,7 @@ body,
     margin-bottom: 1.5rem;
     letter-spacing: -0.06em;
     font-weight: 700;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-style: normal;
 }
 
@@ -482,7 +497,7 @@ body,
     margin-bottom: 1rem;
     font-weight: 300;
     letter-spacing: 0.5px;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .hero-text {
@@ -554,7 +569,7 @@ body,
     color: #111111;
     margin-bottom: 2rem;
     letter-spacing: -0.04em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     text-align: left;
     display: inline-block;
     position: relative;
@@ -583,7 +598,7 @@ body,
     line-height: 1.8;
     margin-bottom: 1.5rem;
     text-align: left;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .about-text a {
@@ -656,7 +671,7 @@ body,
     color: #111111;
     margin-bottom: 3rem;
     letter-spacing: -0.04em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     display: inline-block;
     position: relative;
 }
@@ -684,16 +699,32 @@ body,
     gap: 1.1rem;
 }
 
-.upcoming-gig {
+.upcoming-gig,
+.gig-item-simple {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
 }
 
-.upcoming-gig .gig-venue {
+.upcoming-gig {
+    border: 1px solid rgba(17, 17, 17, 0.12);
+    border-radius: 8px;
+    padding: 1.1rem 1.2rem;
+}
+
+.upcoming-gig .gig-venue,
+.gig-item-simple .gig-venue {
     flex: 1;
     margin-bottom: 0;
+    text-align: left;
+}
+
+.upcoming-gig .gig-date,
+.gig-item-simple .gig-date {
+    margin-left: auto;
+    text-align: right;
+    white-space: nowrap;
 }
 
 .gigs-list-previous {
@@ -721,15 +752,8 @@ body,
     }
 
     .gigs-list-previous .gig-item-simple {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.25rem;
-    }
-
-    .gigs-list-previous .gig-item-simple .gig-date {
-        margin-left: 0;
-        text-align: left;
-        white-space: normal;
+        align-items: center;
+        gap: 0.75rem;
     }
 }
 
@@ -759,10 +783,6 @@ body,
     padding: 0.45rem 0;
     border: none;
     background-color: transparent;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    align-items: center;
     transition: none;
 }
 
@@ -777,27 +797,22 @@ body,
     font-weight: 600;
     margin-bottom: 0.3rem;
     letter-spacing: 0.2px;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .gig-item-simple .gig-venue {
     margin-bottom: 0;
-    text-align: left;
-    flex: 1;
 }
 
 .gig-date {
     font-size: 0.9rem;
     color: var(--muted);
     letter-spacing: 0.2px;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .gig-item-simple .gig-date {
     color: #666666;
-    margin-left: 1rem;
-    text-align: right;
-    white-space: nowrap;
 }
 
 /* Photography Gallery Section */
@@ -869,7 +884,7 @@ body,
     font-weight: 600;
     text-align: left;
     letter-spacing: 0.08em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     background: transparent;
     border: none;
     padding: 0;
@@ -903,7 +918,7 @@ body,
     margin-bottom: 3rem;
     color: #111111;
     letter-spacing: -0.04em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .gallery-back-button {
@@ -953,7 +968,7 @@ body,
     margin-bottom: 3rem;
     color: #111111;
     letter-spacing: -0.04em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     display: inline-block;
     position: relative;
 }
@@ -983,7 +998,7 @@ body,
     color: #111111;
     letter-spacing: 0.5px;
     font-weight: 300;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .gallery-grid {
@@ -1047,9 +1062,10 @@ body,
 
 /* Footer */
 .site-footer {
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     padding: 1.25rem 0;
     color: #111111;
+    border-top: 1px solid rgba(17, 17, 17, 0.12);
 }
 
 .footer-container {
@@ -1062,10 +1078,12 @@ body,
     gap: 1rem;
 }
 .footer-name {
-    font-family: 'Garamond', serif;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     color: #111111;
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-align: left;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .footer-left {
@@ -1083,18 +1101,23 @@ body,
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #ccc;
+    color: #111111;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
 }
 
 .footer-links svg {
     width: 22px;
     height: 22px;
-    fill: #ccc;
+    fill: #111111;
     transition: transform 0.15s ease, fill 0.15s ease;
 }
 
 .footer-links a:hover svg {
-    fill: #fff;
+    fill: var(--accent);
     transform: scale(1.05);
 }
 
@@ -1156,7 +1179,7 @@ body,
     margin-bottom: 3rem;
     text-align: center;
     letter-spacing: -0.04em;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     font-style: normal;
     display: inline-block;
     position: relative;
@@ -1237,7 +1260,7 @@ body,
     transition: all 0.3s ease;
     border-radius: 4px;
     font-size: 1rem;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     margin-top: 1rem;
 }
 
