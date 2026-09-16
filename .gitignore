@@ -1,0 +1,12 @@
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Google credentials / secrets
+*credentials*.json
+*client_secret*.json
+*oauth*.json
+secrets/

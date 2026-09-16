@@ -1,0 +1,12 @@
+{
+  "name": "alex-wardill-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "optimize:images:dry-run": "node scripts/optimize-images.mjs --dry-run"
+  },
+  "dependencies": {
+    "sharp": "^0.34.4"
+  }
+}
