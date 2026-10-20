@@ -1,13 +1,6 @@
 {
   "gigs": [
     {
-      "title": "The Hornsmen of the Apocalypse Big Band",
-      "venue": "Guildhall Jazz Festival",
-      "date": "2026-10-20",
-      "ticketUrl": "",
-      "notes": "Guildhall Jazz Festival"
-    },
-    {
       "title": "Late Late Show Upstairs With Miles Pillinger",
       "venue": "Ronnie Scott's",
       "date": "2026-10-20",
@@ -26,6 +19,13 @@
       "venue": "Guildhall Jazz Festival",
       "date": "2026-11-18",
       "ticketUrl": "https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-mako",
+      "notes": "Guildhall Jazz Festival"
+    },
+    {
+      "title": "The Hornsmen of the Apocalypse Big Band",
+      "venue": "Guildhall Jazz Festival",
+      "date": "2026-11-21",
+      "ticketUrl": "https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-the-hornsmen-of-the-apocalypse-big-band",
       "notes": "Guildhall Jazz Festival"
     }
   ]
