@@ -1,0 +1,22 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+
+const { sortGigEntries } = await import('../js/cms-content.js');
+
+test('sortGigEntries keeps future gigs in ascending order and past gigs in descending order', () => {
+  const today = new Date();
+  const pastDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 4).toISOString().slice(0, 10);
+  const nearFuture = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2).toISOString().slice(0, 10);
+  const laterFuture = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 8).toISOString().slice(0, 10);
+
+  const gigs = [
+    { date: laterFuture },
+    { date: pastDate },
+    { date: nearFuture },
+  ];
+
+  const sorted = sortGigEntries(gigs);
+
+  assert.deepEqual(sorted.upcoming.map((gig) => gig.date), [nearFuture, laterFuture]);
+  assert.deepEqual(sorted.past.map((gig) => gig.date), [pastDate]);
+});

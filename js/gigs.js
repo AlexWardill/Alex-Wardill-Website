@@ -1,8 +1,21 @@
 (() => {
+    async function loadCmsData() {
+        try {
+            const response = await fetch('data/cms-content.json', { cache: 'no-store' });
+            if (!response.ok) {
+                return null;
+            }
+
+            return response.json();
+        } catch (error) {
+            return null;
+        }
+    }
+
     function parseDisplayDateToIso(displayDate) {
         const match = displayDate
             ?.trim()
-            .match(/^(\d{1,2})(?:st|nd|rd|th)\s+([A-Za-z]+)\s+(\d{4})$/i);
+            .match(/^(\d{1,2})(?:st|nd|rd|th)\s+([A-Za-z]+)(?:\s+(\d{4}))?$/i);
 
         if (!match) {
             return null;
@@ -10,7 +23,7 @@
 
         const day = Number.parseInt(match[1], 10);
         const monthName = match[2].toLowerCase();
-        const year = Number.parseInt(match[3], 10);
+        const year = Number.parseInt(match[3] || String(new Date().getFullYear()), 10);
         const monthMap = {
             january: 1,
             february: 2,
@@ -41,6 +54,21 @@
         }
 
         return venueText.slice(splitIndex + 1).trim() || venueText;
+    }
+
+    function formatGigLabel(gig) {
+        if (!gig) {
+            return '';
+        }
+
+        const title = gig.title || '';
+        const venue = gig.venue || '';
+
+        if (title && venue) {
+            return `${title} @ ${venue}`;
+        }
+
+        return title || venue;
     }
 
     function buildGigsSchema(upcomingGigElements) {
@@ -111,33 +139,141 @@
         document.head.appendChild(schemaScript);
     }
 
-    const upcomingGigs = document.querySelectorAll('.upcoming-gig');
+    function extractStaticGigs() {
+        return Array.from(document.querySelectorAll('.gig-item')).map((gig) => {
+            const rawTitle = gig.querySelector('.gig-venue')?.textContent?.trim() || '';
+            const rawDate = gig.querySelector('.gig-date')?.textContent?.trim() || '';
+            const ticketUrl = gig.getAttribute('data-ticket-link')?.trim() || '';
+            const isoDate = parseDisplayDateToIso(rawDate);
 
-    buildGigsSchema(upcomingGigs);
+            if (!rawTitle || !isoDate) {
+                return null;
+            }
 
-    upcomingGigs.forEach((gig) => {
-        const ticketLink = gig.getAttribute('data-ticket-link')?.trim();
+            const hasVenue = rawTitle.includes('@');
+            const title = hasVenue ? rawTitle.split('@')[0].trim() : rawTitle;
+            const venue = hasVenue ? rawTitle.split('@').slice(1).join('@').trim() : rawTitle;
 
-        if (!ticketLink) {
+            return {
+                title,
+                venue,
+                date: isoDate,
+                ticketUrl,
+            };
+        }).filter(Boolean);
+    }
+
+    function renderGigList(gigs, containerSelector, { allowTicketLinks = true, upcoming = false } = {}) {
+        const container = document.querySelector(containerSelector);
+        if (!container) {
             return;
         }
 
-        const venue = gig.querySelector('.gig-venue')?.textContent?.trim();
-        gig.classList.add('gig-item-clickable');
-        gig.setAttribute('tabindex', '0');
-        gig.setAttribute('role', 'link');
-        gig.setAttribute('aria-label', venue ? `Open ticket link for ${venue}` : 'Open ticket link');
+        container.innerHTML = '';
 
-        const openTicketLink = () => {
-            window.open(ticketLink, '_blank', 'noopener,noreferrer');
-        };
+        if (!gigs.length) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'gig-item gig-item-simple';
+            placeholder.innerHTML = '<div class="gig-venue">No gigs scheduled yet.</div><div class="gig-date">Check back soon</div>';
+            container.appendChild(placeholder);
+            return;
+        }
 
-        gig.addEventListener('click', openTicketLink);
-        gig.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                openTicketLink();
+        gigs.forEach((gig) => {
+            const item = document.createElement('div');
+            const ticketLink = allowTicketLinks ? (gig.ticketUrl || '').trim() : '';
+            const formattedText = formatGigLabel(gig);
+            const dateText = gig.date ? new Date(`${gig.date}T00:00:00`).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+                year: upcoming ? undefined : 'numeric',
+            }) : '';
+
+            item.className = `gig-item ${upcoming ? 'upcoming-gig' : 'gig-item-simple'}`;
+            if (ticketLink) {
+                item.classList.add('gig-item-clickable');
+                item.setAttribute('tabindex', '0');
+                item.setAttribute('role', 'link');
+                item.setAttribute('aria-label', `Open ticket link for ${formattedText}`);
+                item.setAttribute('data-ticket-link', ticketLink);
+                item.addEventListener('click', () => window.open(ticketLink, '_blank', 'noopener,noreferrer'));
+                item.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        window.open(ticketLink, '_blank', 'noopener,noreferrer');
+                    }
+                });
+            }
+
+            item.innerHTML = `
+                <div class="gig-venue">${formattedText}</div>
+                <div class="gig-date">${dateText}</div>
+            `;
+            container.appendChild(item);
+        });
+    }
+
+    function mergeGigSources(cmsGigs, fallbackGigs) {
+        const map = new Map();
+
+        [...fallbackGigs, ...cmsGigs].forEach((gig) => {
+            if (!gig || !gig.date || !gig.title) {
+                return;
+            }
+
+            const key = `${gig.date}|${gig.title}`;
+            if (!map.has(key)) {
+                map.set(key, gig);
             }
         });
-    });
+
+        return Array.from(map.values());
+    }
+
+    async function hydrateCmsGigs() {
+        const fallbackGigs = extractStaticGigs();
+        const cmsData = await loadCmsData();
+        const cmsGigs = cmsData && Array.isArray(cmsData.gigs) ? cmsData.gigs : [];
+        const allGigs = mergeGigSources(cmsGigs, fallbackGigs);
+
+        const { sortGigEntries } = await import('./cms-content.js');
+        const { upcoming, past } = sortGigEntries(allGigs);
+
+        renderGigList(upcoming, '.gigs-list', { allowTicketLinks: true, upcoming: true });
+        renderGigList(past, '.gigs-list-previous', { allowTicketLinks: true, upcoming: false });
+
+        const upcomingGigNodes = document.querySelectorAll('.upcoming-gig');
+        buildGigsSchema(upcomingGigNodes);
+    }
+
+    const existingUpcoming = document.querySelectorAll('.upcoming-gig');
+    if (existingUpcoming.length) {
+        buildGigsSchema(existingUpcoming);
+        existingUpcoming.forEach((gig) => {
+            const ticketLink = gig.getAttribute('data-ticket-link')?.trim();
+            if (!ticketLink) {
+                return;
+            }
+
+            const venue = gig.querySelector('.gig-venue')?.textContent?.trim();
+            gig.classList.add('gig-item-clickable');
+            gig.setAttribute('tabindex', '0');
+            gig.setAttribute('role', 'link');
+            gig.setAttribute('aria-label', venue ? `Open ticket link for ${venue}` : 'Open ticket link');
+
+            const openTicketLink = () => {
+                window.open(ticketLink, '_blank', 'noopener,noreferrer');
+            };
+
+            gig.addEventListener('click', openTicketLink);
+            gig.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openTicketLink();
+                }
+            });
+        });
+    }
+
+    hydrateCmsGigs();
 })();
