@@ -43,6 +43,16 @@ export function sortGigEntries(gigs = []) {
   return { upcoming, past };
 }
 
+export function getUpcomingGigEntries(gigs = [], limit = Infinity) {
+  const { upcoming } = sortGigEntries(gigs);
+
+  if (!Number.isFinite(limit)) {
+    return upcoming;
+  }
+
+  return upcoming.slice(0, limit);
+}
+
 export function formatGigDate(dateString, { includeYear = true } = {}) {
   const date = parseIsoDate(dateString);
 

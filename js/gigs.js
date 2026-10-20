@@ -213,6 +213,49 @@
         });
     }
 
+    function renderHomeGigList(gigs, containerSelector) {
+        const container = document.querySelector(containerSelector);
+        if (!container) {
+            return;
+        }
+
+        container.innerHTML = '';
+
+        if (!gigs.length) {
+            const placeholder = document.createElement('div');
+            placeholder.className = 'home-gig-item';
+            placeholder.innerHTML = '<span class="home-gig-venue">No gigs scheduled yet.</span><span class="home-gig-date">Check back soon</span>';
+            container.appendChild(placeholder);
+            return;
+        }
+
+        gigs.forEach((gig) => {
+            const ticketLink = (gig.ticketUrl || '').trim();
+            const venueText = formatGigLabel(gig);
+            const dateText = gig.date ? new Date(`${gig.date}T00:00:00`).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'short',
+            }) : '';
+
+            const item = ticketLink ? document.createElement('a') : document.createElement('div');
+            item.className = 'home-gig-item';
+            item.setAttribute('aria-label', ticketLink ? `Open ticket link for ${venueText}` : venueText);
+
+            if (ticketLink) {
+                item.href = ticketLink;
+                item.target = '_blank';
+                item.rel = 'noopener noreferrer';
+            }
+
+            item.innerHTML = `
+                <span class="home-gig-venue">${venueText}</span>
+                <span class="home-gig-date">${dateText}</span>
+            `;
+
+            container.appendChild(item);
+        });
+    }
+
     function mergeGigSources(cmsGigs, fallbackGigs) {
         const map = new Map();
 
@@ -236,11 +279,16 @@
         const cmsGigs = cmsData && Array.isArray(cmsData.gigs) ? cmsData.gigs : [];
         const allGigs = mergeGigSources(cmsGigs, fallbackGigs);
 
-        const { sortGigEntries } = await import('./cms-content.js');
+        const { getUpcomingGigEntries, sortGigEntries } = await import('./cms-content.js');
         const { upcoming, past } = sortGigEntries(allGigs);
 
         renderGigList(upcoming, '.gigs-list', { allowTicketLinks: true, upcoming: true });
         renderGigList(past, '.gigs-list-previous', { allowTicketLinks: true, upcoming: false });
+
+        const homeContainer = document.querySelector('.home-gigs-list');
+        if (homeContainer) {
+            renderHomeGigList(getUpcomingGigEntries(allGigs, 5), '.home-gigs-list');
+        }
 
         const upcomingGigNodes = document.querySelectorAll('.upcoming-gig');
         buildGigsSchema(upcomingGigNodes);
