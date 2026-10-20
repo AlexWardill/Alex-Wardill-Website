@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:cms": "node scripts/build-cms-data.mjs",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "optimize:images:dry-run": "node scripts/optimize-images.mjs --dry-run"
+    "optimize:images:dry-run": "node scripts/optimize-images.mjs --dry-run",
+    "test:cms": "node --test tests/cms-data.test.mjs"
   },
   "dependencies": {
     "sharp": "^0.34.4"
