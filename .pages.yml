@@ -12,7 +12,7 @@ content:
     label: Gigs
     type: collection
     path: content/gigs
-    format: markdown
+    format: yaml-frontmatter
     fields:
       - name: title
         label: Title
