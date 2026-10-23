@@ -16,6 +16,7 @@
     let currentIndex = 0;
     let galleryItems = Array.from(document.querySelectorAll('.gallery-item img'));
     let imageData = {};
+    const getFullSizeSrc = (image) => image.getAttribute('data-full-src') || image.currentSrc || image.src;
 
     const sectionDisplayNames = {
         photography: 'Photography',
@@ -94,10 +95,11 @@
                 currentIndex = index;
                 const currentImage = galleryItems[currentIndex];
                 const section = currentImage.getAttribute('data-section') || '';
-                const imageName = currentImage.getAttribute('src')?.split('/').pop() || '';
+                const imageSrc = getFullSizeSrc(currentImage);
+                const imageName = imageSrc.split('/').pop() || '';
                 const dataSection = section === 'photography' ? 'photography' : section;
 
-                lightboxImage.src = currentImage.src;
+                lightboxImage.src = imageSrc;
                 lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
                 lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
 
@@ -130,9 +132,10 @@
                     return;
                 }
                 const section = currentImage.getAttribute('data-section') || '';
-                const imageName = currentImage.getAttribute('src')?.split('/').pop() || '';
+                const imageSrc = getFullSizeSrc(currentImage);
+                const imageName = imageSrc.split('/').pop() || '';
                 const dataSection = section === 'photography' ? 'photography' : section;
-                lightboxImage.src = currentImage.src;
+                lightboxImage.src = imageSrc;
                 lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
                 lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
                 const matchingData = imageData[dataSection] || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
@@ -152,9 +155,10 @@
                     return;
                 }
                 const section = currentImage.getAttribute('data-section') || '';
-                const imageName = currentImage.getAttribute('src')?.split('/').pop() || '';
+                const imageSrc = getFullSizeSrc(currentImage);
+                const imageName = imageSrc.split('/').pop() || '';
                 const dataSection = section === 'photography' ? 'photography' : section;
-                lightboxImage.src = currentImage.src;
+                lightboxImage.src = imageSrc;
                 lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
                 lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
                 const matchingData = imageData[dataSection] || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
