@@ -20,8 +20,7 @@
 
     const sectionDisplayNames = {
         photography: 'Photography',
-        gigs_2025: 'Gigs 2025',
-        gigs_2026: 'Gigs 2026',
+        gigs: 'Gigs',
         portraits: 'Portraits',
         siena: 'Siena',
         other: 'Other',
