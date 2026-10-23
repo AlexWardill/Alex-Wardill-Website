@@ -43,20 +43,25 @@
     <section id="contact" class="contact-section">
         <div class="contact-container">
             <h1 class="contact-title">Get in Touch</h1>
-            <form class="contact-form" action="https://formspree.io/f/mkovqjqg" method="POST">
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="95ed8814-9078-4d71-a6b0-06405d164b42">
+                <input type="hidden" name="subject" value="New message from alexwardill.com">
+                <input type="hidden" name="from_name" value="Alex Wardill Website Contact Form">
+                <input type="hidden" name="redirect" value="https://alexwardill.com/thanks/">
+                <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display: none;">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" autocomplete="name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Your Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" autocomplete="email" required>
                 </div>
 
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
+                    <input type="text" id="subject" name="enquiry_subject" required>
                 </div>
 
                 <div class="form-group">
