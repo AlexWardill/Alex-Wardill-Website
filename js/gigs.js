@@ -1,13 +1,14 @@
 (() => {
     async function loadCmsData() {
         try {
-            const response = await fetch('data/cms-content.json', { cache: 'no-store' });
+            const response = await fetch('data/cms-content.json');
             if (!response.ok) {
-                return null;
+                throw new Error(`CMS data request failed with status ${response.status}.`);
             }
 
             return response.json();
         } catch (error) {
+            console.warn('Unable to load CMS gig data; using the static gig list.', error);
             return null;
         }
     }
@@ -205,10 +206,13 @@
                 });
             }
 
-            item.innerHTML = `
-                <div class="gig-venue">${formattedText}</div>
-                <div class="gig-date">${dateText}</div>
-            `;
+            const venue = document.createElement('div');
+            venue.className = 'gig-venue';
+            venue.textContent = formattedText;
+            const date = document.createElement('div');
+            date.className = 'gig-date';
+            date.textContent = dateText;
+            item.append(venue, date);
             container.appendChild(item);
         });
     }
@@ -247,10 +251,13 @@
                 item.rel = 'noopener noreferrer';
             }
 
-            item.innerHTML = `
-                <span class="home-gig-venue">${venueText}</span>
-                <span class="home-gig-date">${dateText}</span>
-            `;
+            const venue = document.createElement('span');
+            venue.className = 'home-gig-venue';
+            venue.textContent = venueText;
+            const date = document.createElement('span');
+            date.className = 'home-gig-date';
+            date.textContent = dateText;
+            item.append(venue, date);
 
             container.appendChild(item);
         });

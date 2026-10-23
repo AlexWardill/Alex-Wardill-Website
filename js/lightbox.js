@@ -41,6 +41,14 @@
         return '';
     };
 
+    const loadJson = async (url) => {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`${url} request failed with status ${response.status}.`);
+        }
+        return response.json();
+    };
+
     const appendCmsGalleryImages = (cmsData) => {
         const cmsGalleryImages = Array.isArray(cmsData?.galleryImages) ? cmsData.galleryImages : [];
         if (!cmsGalleryImages.length) {
@@ -79,10 +87,51 @@
         galleryItems = Array.from(document.querySelectorAll('.gallery-item img'));
     };
 
-    Promise.all([
-        fetch('image_data.json').then((response) => response.json()).catch(() => ({})),
-        fetch('data/cms-content.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : {}).catch(() => ({})),
-    ]).then(([staticData, cmsData]) => {
+    const imageDataRequest = loadJson('image_data.json').catch((error) => {
+        console.warn('Unable to load photo captions.', error);
+        return {};
+    });
+    const gallerySlug = detectGallerySlug();
+    const cmsDataRequest = gallerySlug
+        ? loadJson('data/cms-content.json').catch((error) => {
+            console.warn('Unable to load CMS gallery images.', error);
+            return {};
+        })
+        : Promise.resolve({});
+
+    const showImageAtIndex = (index) => {
+        currentIndex = index;
+        const currentImage = galleryItems[currentIndex];
+        if (!currentImage) {
+            return;
+        }
+
+        const section = currentImage.getAttribute('data-section') || '';
+        const imageSrc = getFullSizeSrc(currentImage);
+        const imageName = imageSrc.split('/').pop() || '';
+        const dataSection = section === 'photography' ? 'photography' : section;
+        const matchingData = imageData[dataSection]
+            || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
+
+        lightboxImage.src = imageSrc;
+        lightboxImage.alt = currentImage.alt || 'Photo';
+        lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
+        lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
+        lightboxLocation.textContent = matchingData?.[imageName] || '';
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeButton?.focus();
+    };
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        galleryItems[currentIndex]?.focus();
+    };
+
+    Promise.all([imageDataRequest, cmsDataRequest]).then(([staticData, cmsData]) => {
         imageData = staticData || {};
         appendCmsGalleryImages(cmsData || {});
 
@@ -91,89 +140,39 @@
         }
 
         galleryItems.forEach((item, index) => {
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('aria-label', `Open photo: ${item.alt || 'Photo'}`);
             item.addEventListener('click', () => {
-                currentIndex = index;
-                const currentImage = galleryItems[currentIndex];
-                const section = currentImage.getAttribute('data-section') || '';
-                const imageSrc = getFullSizeSrc(currentImage);
-                const imageName = imageSrc.split('/').pop() || '';
-                const dataSection = section === 'photography' ? 'photography' : section;
-
-                lightboxImage.src = imageSrc;
-                lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
-                lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
-
-                const matchingData = imageData[dataSection]
-                    || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
-
-                if (matchingData && matchingData[imageName]) {
-                    lightboxLocation.innerHTML = matchingData[imageName].replace(/\n/g, '<br>');
-                } else {
-                    lightboxLocation.textContent = '';
+                showImageAtIndex(index);
+            });
+            item.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    showImageAtIndex(index);
                 }
-
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
             });
         });
 
         if (closeButton) {
-            closeButton.addEventListener('click', () => {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
+            closeButton.addEventListener('click', closeLightbox);
         }
 
         if (nextButton) {
             nextButton.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % galleryItems.length;
-                const currentImage = galleryItems[currentIndex];
-                if (!currentImage) {
-                    return;
-                }
-                const section = currentImage.getAttribute('data-section') || '';
-                const imageSrc = getFullSizeSrc(currentImage);
-                const imageName = imageSrc.split('/').pop() || '';
-                const dataSection = section === 'photography' ? 'photography' : section;
-                lightboxImage.src = imageSrc;
-                lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
-                lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
-                const matchingData = imageData[dataSection] || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
-                if (matchingData && matchingData[imageName]) {
-                    lightboxLocation.innerHTML = matchingData[imageName].replace(/\n/g, '<br>');
-                } else {
-                    lightboxLocation.textContent = '';
-                }
+                showImageAtIndex((currentIndex + 1) % galleryItems.length);
             });
         }
 
         if (prevButton) {
             prevButton.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-                const currentImage = galleryItems[currentIndex];
-                if (!currentImage) {
-                    return;
-                }
-                const section = currentImage.getAttribute('data-section') || '';
-                const imageSrc = getFullSizeSrc(currentImage);
-                const imageName = imageSrc.split('/').pop() || '';
-                const dataSection = section === 'photography' ? 'photography' : section;
-                lightboxImage.src = imageSrc;
-                lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
-                lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
-                const matchingData = imageData[dataSection] || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
-                if (matchingData && matchingData[imageName]) {
-                    lightboxLocation.innerHTML = matchingData[imageName].replace(/\n/g, '<br>');
-                } else {
-                    lightboxLocation.textContent = '';
-                }
+                showImageAtIndex((currentIndex - 1 + galleryItems.length) % galleryItems.length);
             });
         }
 
         lightbox.addEventListener('click', (event) => {
             if (event.target === lightbox) {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = 'auto';
+                closeLightbox();
             }
         });
 
@@ -182,7 +181,18 @@
                 return;
             }
 
-            if (event.key === 'ArrowRight') {
+            if (event.key === 'Tab') {
+                const focusableControls = Array.from(lightbox.querySelectorAll('button:not([disabled])'));
+                const firstControl = focusableControls[0];
+                const lastControl = focusableControls[focusableControls.length - 1];
+                if (event.shiftKey && document.activeElement === firstControl) {
+                    event.preventDefault();
+                    lastControl?.focus();
+                } else if (!event.shiftKey && document.activeElement === lastControl) {
+                    event.preventDefault();
+                    firstControl?.focus();
+                }
+            } else if (event.key === 'ArrowRight') {
                 nextButton?.click();
             } else if (event.key === 'ArrowLeft') {
                 prevButton?.click();
@@ -190,9 +200,7 @@
                 closeButton?.click();
             }
         });
-    }).catch(() => {
-        if (!galleryItems.length) {
-            return;
-        }
+    }).catch((error) => {
+        console.error('Unable to initialize the photo viewer.', error);
     });
 })();

@@ -1364,6 +1364,7 @@ body,
 #lightbox-location {
     font-size: 0.9rem;
     color: #999;
+    white-space: pre-line;
 }
 
 .lightbox-prev,

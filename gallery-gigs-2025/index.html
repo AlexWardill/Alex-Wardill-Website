@@ -16,9 +16,6 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alex Wardill - Gigs 2025">
     <meta name="twitter:description" content="Live gig photography gallery from 2025 by Alex Wardill.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,7 +23,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo"><a href="/">Alex Wardill</a></div>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navMenu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -41,6 +38,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- Photoshoot Section -->
     <section class="photoshoot-section">
         <div class="photoshoot-container">
@@ -89,18 +87,20 @@
         </div>
     </section>
 
+    </main>
+
     <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox">
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-section" aria-hidden="true" tabindex="-1">
         <div class="lightbox-content">
-            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-close" type="button" aria-label="Close photo viewer">&times;</button>
             <img id="lightbox-image" src="" alt="">
         </div>
         <div class="lightbox-section-caption">
             <p id="lightbox-section">Photos</p>
             <p id="lightbox-location"></p>
         </div>
-        <button class="lightbox-prev">&lt;</button>
-        <button class="lightbox-next">&gt;</button>
+        <button class="lightbox-prev" type="button" aria-label="Previous photo">&lt;</button>
+        <button class="lightbox-next" type="button" aria-label="Next photo">&gt;</button>
         <p id="lightbox-caption" class="lightbox-caption"></p>
     </div>
 

@@ -16,9 +16,6 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alex Wardill - Contact">
     <meta name="twitter:description" content="Get in touch with Alex Wardill for music and photography enquiries.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,7 +23,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo"><a href="/">Alex Wardill</a></div>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navMenu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -41,6 +38,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="contact-container">
@@ -70,6 +68,8 @@
             </form>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer">

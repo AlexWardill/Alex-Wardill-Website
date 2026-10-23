@@ -16,9 +16,6 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alex Wardill - About">
     <meta name="twitter:description" content="Learn more about Alex Wardill's music background, training, and creative work.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,7 +23,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo"><a href="/">Alex Wardill</a></div>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navMenu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -41,6 +38,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="about-container about-container-centered">
@@ -66,7 +64,7 @@
                 <img src="images/about-page/NYJO-WOH_Group_Behind.webp" alt="Alex Wardill" width="1600" height="900" loading="lazy" decoding="async">
             </div>
             <div class="about-content">
-                <h1 class="about-title">NYJO</h1>
+                <h2 class="about-title">NYJO</h2>
                 <p class="about-text">
                     Alex joined the National Youth Jazz Orchestra (NYJO) Academy Big Band in 2018, directed by Sebastian De Krom. 8 years later, Alex is still performing with NYJO in several of their projects: NYJO 60: Fodder on my wings, NYJO feat. Jasmine Myra, NYJO Blue Note Reimagined, and NYJO feat. Jazz Kayser. Alex also finds himself on the educational side of things, running weekly group sessions for their newest under-18s ensemble "First Collective", introducing jazz, improvisation and a variety of other music to secondary school-aged students.
                 </p>
@@ -78,7 +76,7 @@
     <section class="about-section">
         <div class="about-container">
             <div class="about-content">
-                <h1 class="about-title">Photography</h1>
+                <h2 class="about-title">Photography</h2>
                 <p class="about-text">
                     As a musician himself, Alex understands what performers are looking for from their photos and enjoys working with individuals and groups to capture professional and exciting images both in live performance and natural light portrait sessions.
                 </p>
@@ -88,6 +86,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer">

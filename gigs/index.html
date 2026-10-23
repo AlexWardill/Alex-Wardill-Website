@@ -16,10 +16,6 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alex Wardill - Gigs">
     <meta name="twitter:description" content="See upcoming and previous gigs for Alex Wardill, with dates and venue details.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Garamond:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,7 +23,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo"><a href="/">Alex Wardill</a></div>
-            <button class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navMenu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -42,6 +38,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- Upcoming Gigs Section -->
     <section class="gigs-section">
         <div class="gigs-container">
@@ -76,7 +73,7 @@
     <!-- Previous Gigs Section -->
     <section class="gigs-section gigs-section-alt">
         <div class="gigs-container">
-            <h1 class="gigs-title">Previous Gigs</h1>
+            <h2 class="gigs-title">Previous Gigs</h2>
             <div class="gigs-list gigs-list-previous">
                 <div class="gig-item gig-item-simple" data-ticket-link="https://www.ronniescotts.co.uk/find-a-show/late-late-show-upstairs-miles-pillinger">
                     <div class="gig-venue">Late Late Show Upstairs With Miles Pillinger</div>
@@ -222,6 +219,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer">
