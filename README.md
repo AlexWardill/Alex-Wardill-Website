@@ -19,8 +19,8 @@ Static portfolio website with Pages CMS content management.
 
 ## GitHub Actions and production safety
 
-The Build CMS content workflow validates and builds changes on `develop`; generated files are committed back to that branch. Its scheduled run targets `develop`. A production push is configured to deploy the site, but this work is not authorized for production yet. Do not merge these changes or change the live Pages settings until production promotion is explicitly approved.
+The Build CMS content workflow validates and builds changes on `develop`; generated files are committed back to that branch. Production pushes and the daily scheduled run target `production`, where generated files are committed and the site is deployed to GitHub Pages.
 
-For testing, authorize Pages CMS to access `develop` and push CMS edits there. Repository Actions already has write permission. GitHub only activates scheduled workflows when the workflow is present on the default branch, so the daily run will not activate until the workflow is promoted to that branch.
+For testing, authorize Pages CMS to access `develop` and push CMS edits there. Repository Actions already has write permission. GitHub Pages must use **GitHub Actions** as its publishing source. GitHub only activates scheduled workflows when the workflow is present on the default branch.
 
 The existing production site uses directory routes (for example `/gigs/`); local previews use the same paths.

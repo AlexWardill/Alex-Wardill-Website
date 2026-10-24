@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TARGET_BRANCH: ${{ github.event_name == 'schedule' && 'develop' || github.ref_name }}
+      TARGET_BRANCH: ${{ github.event_name == 'schedule' && 'production' || github.ref_name }}
     outputs:
       target_branch: ${{ steps.target.outputs.branch }}
 
