@@ -880,5 +880,11 @@
     "description": "Tokyo",
     "gallery": "other",
     "alt": "Tokyo"
+  },
+  {
+    "image": "/images/optimized/gallery/beat-individuals-v1-07.jpg",
+    "description": "robbie",
+    "gallery": "portraits",
+    "alt": "robbie"
   }
 ]
