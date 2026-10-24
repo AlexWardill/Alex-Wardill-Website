@@ -6,6 +6,12 @@
     "alt": "Carmen Llena"
   },
   {
+    "image": "/images/optimized/gallery/beat-individuals-v1-07.jpg",
+    "description": "robbie",
+    "gallery": "portraits",
+    "alt": "robbie"
+  },
+  {
     "image": "/images/Gallery/Portraits/mo-24.jpg",
     "description": "Mo Cook",
     "gallery": "portraits",
@@ -880,11 +886,5 @@
     "description": "Tokyo",
     "gallery": "other",
     "alt": "Tokyo"
-  },
-  {
-    "image": "/images/optimized/gallery/beat-individuals-v1-07.jpg",
-    "description": "robbie",
-    "gallery": "portraits",
-    "alt": "robbie"
   }
 ]
