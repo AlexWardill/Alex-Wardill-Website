@@ -25,8 +25,8 @@ For `develop` testing:
 
 1. Allow Actions to read and write repository contents. The repository is currently configured with write access.
 2. Add the repository to Pages CMS and grant it access to the `develop` branch.
-3. Push changes to `develop` or manually run **Build CMS content** from the Actions tab with `develop` selected. The workflow validates, builds, and commits generated changes on `develop`; it does not deploy Pages from that branch.
+3. Push changes to `develop`. The workflow validates, builds, and commits generated changes on `develop`; it does not deploy Pages from that branch.
 
-GitHub only runs scheduled workflows from the repository's default branch. The daily gig check will therefore not become active until the workflow reaches the default branch. Do not merge it to `production` or change the live Pages source until production promotion is authorized.
+GitHub only runs scheduled workflows, and enables manual dispatch, from workflow files on the repository's default branch. Those options will therefore not become available until the workflow reaches the default branch. Do not merge it to `production` or change the live Pages source until production promotion is authorized.
 
 Gig listings are fully managed in Pages CMS; no external credentials are needed.
