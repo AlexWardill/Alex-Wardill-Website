@@ -13,6 +13,33 @@
         return;
     }
 
+    const lightboxContent = lightbox.querySelector('.lightbox-content');
+    const icon = (path) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + path + '"/></svg>';
+    if (closeButton) closeButton.innerHTML = icon('M6 6l12 12M18 6L6 18');
+    if (prevButton) {
+        prevButton.innerHTML = icon('M15 18l-6-6 6-6');
+        lightboxContent?.insertBefore(prevButton, lightboxImage);
+    }
+    if (nextButton) {
+        nextButton.innerHTML = icon('M9 6l6 6-6 6');
+        lightboxContent?.appendChild(nextButton);
+    }
+    const lightboxCounter = document.createElement('p');
+    lightboxCounter.className = 'lightbox-counter';
+    lightboxCounter.setAttribute('aria-live', 'polite');
+    lightbox.appendChild(lightboxCounter);
+    lightboxImage.draggable = false;
+
+    const loadedSources = new Set();
+    const preload = (src) => {
+        if (!src || loadedSources.has(src)) {
+            return Promise.resolve();
+        }
+        const image = new Image();
+        image.src = src;
+        return image.decode().then(() => loadedSources.add(src)).catch(() => {});
+    };
+
     let currentIndex = 0;
     let galleryItems = Array.from(document.querySelectorAll('.gallery-item img'));
     let imageData = {};
@@ -110,18 +137,126 @@
         const matchingData = imageData[dataSection]
             || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);
 
-        lightboxImage.src = imageSrc;
+        const shownSrc = loadedSources.has(imageSrc) ? imageSrc : (currentImage.currentSrc || currentImage.src);
+        lightboxImage.src = shownSrc;
+        if (shownSrc !== imageSrc) {
+            preload(imageSrc).then(() => {
+                if (currentIndex === index && lightbox.classList.contains('active')) {
+                    lightboxImage.src = imageSrc;
+                }
+            });
+        }
         lightboxImage.alt = currentImage.alt || 'Photo';
+        lightboxCounter.textContent = (index + 1) + ' / ' + galleryItems.length;
+        const hasMultiple = galleryItems.length > 1;
+        if (prevButton) prevButton.hidden = !hasMultiple;
+        if (nextButton) nextButton.hidden = !hasMultiple;
+        [1, -1, 2].forEach((offset) => {
+            const neighbour = galleryItems[(index + offset + galleryItems.length) % galleryItems.length];
+            if (neighbour) preload(getFullSizeSrc(neighbour));
+        });
         lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
         lightboxSection.textContent = sectionDisplayNames[dataSection] || 'Photos';
         lightboxLocation.textContent = matchingData?.[imageName] || '';
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        closeButton?.focus();
+        if (!lightbox.classList.contains('active')) {
+            lightbox.classList.add('active');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            closeButton?.focus({ preventScroll: true });
+        }
+    };
+
+    const stepBy = (direction) => {
+        const total = galleryItems.length;
+        showImageAtIndex((currentIndex + direction + total) % total);
+    };
+
+    const slideTransition = 'transform 0.15s ease-out, opacity 0.15s ease-out';
+
+    const resetImagePosition = () => {
+        lightboxImage.style.transition = '';
+        lightboxImage.style.transform = '';
+        lightboxImage.style.opacity = '';
+    };
+
+    const slideToNext = (direction) => {
+        const distance = Math.round(window.innerWidth * 0.5) * -direction;
+        lightboxImage.style.transition = slideTransition;
+        lightboxImage.style.transform = 'translateX(' + distance + 'px)';
+        lightboxImage.style.opacity = '0';
+        window.setTimeout(() => {
+            stepBy(direction);
+            lightboxImage.style.transition = 'none';
+            lightboxImage.style.transform = 'translateX(' + (-distance * 0.5) + 'px)';
+            void lightboxImage.offsetWidth;
+            lightboxImage.style.transition = slideTransition;
+            lightboxImage.style.transform = 'translateX(0)';
+            lightboxImage.style.opacity = '1';
+        }, 150);
+    };
+
+    const enableSwipe = () => {
+        let startX = 0;
+        let startY = 0;
+        let axis = '';
+        let pointerId = null;
+
+        lightboxImage.addEventListener('pointerdown', (event) => {
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+            pointerId = event.pointerId;
+            startX = event.clientX;
+            startY = event.clientY;
+            axis = '';
+            lightboxImage.setPointerCapture?.(pointerId);
+            lightboxImage.style.transition = 'none';
+        });
+
+        lightboxImage.addEventListener('pointermove', (event) => {
+            if (event.pointerId !== pointerId) return;
+            const dx = event.clientX - startX;
+            const dy = event.clientY - startY;
+            if (!axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8) {
+                axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+                lightboxImage.classList.add('is-dragging');
+            }
+            if (axis === 'x' && galleryItems.length > 1) {
+                lightboxImage.style.transform = 'translateX(' + dx + 'px)';
+            } else if (axis === 'y' && dy > 0) {
+                lightboxImage.style.transform = 'translateY(' + dy + 'px)';
+                lightboxImage.style.opacity = String(Math.max(0.3, 1 - dy / 400));
+            }
+        });
+
+        const endDrag = (event) => {
+            if (event.pointerId !== pointerId) return;
+            const dx = event.clientX - startX;
+            const dy = event.clientY - startY;
+            const dragAxis = axis;
+            pointerId = null;
+            axis = '';
+            lightboxImage.classList.remove('is-dragging');
+
+            if (event.type === 'pointercancel') {
+                resetImagePosition();
+            } else if (dragAxis === 'x' && Math.abs(dx) > 50 && galleryItems.length > 1) {
+                lightboxImage.style.transform = '';
+                lightboxImage.style.opacity = '';
+                slideToNext(dx < 0 ? 1 : -1);
+            } else if (dragAxis === 'y' && dy > 100) {
+                closeLightbox();
+            } else {
+                lightboxImage.style.transition = slideTransition;
+                lightboxImage.style.transform = '';
+                lightboxImage.style.opacity = '';
+            }
+        };
+
+        lightboxImage.addEventListener('pointerup', endDrag);
+        lightboxImage.addEventListener('pointercancel', endDrag);
     };
 
     const closeLightbox = () => {
+        resetImagePosition();
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
@@ -155,20 +290,12 @@
             closeButton.addEventListener('click', closeLightbox);
         }
 
-        if (nextButton) {
-            nextButton.addEventListener('click', () => {
-                showImageAtIndex((currentIndex + 1) % galleryItems.length);
-            });
-        }
-
-        if (prevButton) {
-            prevButton.addEventListener('click', () => {
-                showImageAtIndex((currentIndex - 1 + galleryItems.length) % galleryItems.length);
-            });
-        }
+        nextButton?.addEventListener('click', () => stepBy(1));
+        prevButton?.addEventListener('click', () => stepBy(-1));
+        enableSwipe();
 
         lightbox.addEventListener('click', (event) => {
-            if (event.target === lightbox) {
+            if (event.target === lightbox || event.target === lightboxContent) {
                 closeLightbox();
             }
         });
@@ -179,7 +306,7 @@
             }
 
             if (event.key === 'Tab') {
-                const focusableControls = Array.from(lightbox.querySelectorAll('button:not([disabled])'));
+                const focusableControls = Array.from(lightbox.querySelectorAll('button:not([disabled])')).filter((button) => button.getClientRects().length > 0);
                 const firstControl = focusableControls[0];
                 const lastControl = focusableControls[focusableControls.length - 1];
                 if (event.shiftKey && document.activeElement === firstControl) {
