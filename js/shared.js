@@ -1,18 +1,37 @@
 (() => {
+    const isHomePage = document.body.classList.contains('home-page');
+    if (isHomePage) {
+        window.history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+        window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+    }
+
+    const { pathname, search, hash } = window.location;
+    if (pathname.endsWith('.html')) {
+        const normalizedPath = pathname.endsWith('/index.html')
+            ? pathname.slice(0, -'index.html'.length)
+            : `${pathname.slice(0, -'.html'.length)}/`;
+        window.history.replaceState({}, '', `${normalizedPath}${search}${hash}`);
+    }
+
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.nav-link');
 
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+            const isOpen = hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active', isOpen);
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            hamburger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
         });
 
         navLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.setAttribute('aria-label', 'Open navigation');
             });
         });
     }
@@ -30,6 +49,11 @@
             }
 
             event.preventDefault();
+            if (isHomePage && targetSelector === '#home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
             target.scrollIntoView({ behavior: 'smooth' });
         });
     });

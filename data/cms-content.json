@@ -1,0 +1,180 @@
+{
+  "gigs": [
+    {
+      "title": "Ruta Di \"Onwards & Upwards\" Album Launch",
+      "venue": "Jazz Cafe Posk",
+      "date": "2026-10-24",
+      "ticketUrl": "",
+      "notes": "Album launch",
+      "city": ""
+    },
+    {
+      "title": "Mako",
+      "venue": "Guildhall Jazz Festival",
+      "date": "2026-11-18",
+      "ticketUrl": "https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-mako",
+      "notes": "Guildhall Jazz Festival",
+      "city": ""
+    },
+    {
+      "title": "The Hornsmen of the Apocalypse Big Band",
+      "venue": "Guildhall Jazz Festival",
+      "date": "2026-11-21",
+      "ticketUrl": "https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-the-hornsmen-of-the-apocalypse-big-band",
+      "notes": "Guildhall Jazz Festival",
+      "city": ""
+    },
+    {
+      "title": "Evelyn",
+      "venue": "Morocco Bound Bookshop",
+      "date": "2026-12-06",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Late Late Show Upstairs With Miles Pillinger",
+      "venue": "Ronnie Scott's",
+      "date": "2026-10-20",
+      "ticketUrl": "https://www.ronniescotts.co.uk/find-a-show/late-late-show-upstairs-miles-pillinger",
+      "notes": "Upstairs, with Miles Pillinger",
+      "city": ""
+    },
+    {
+      "title": "Composers Workshop Big Band",
+      "venue": "The Vortex",
+      "date": "2026-07-21",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Evelyn",
+      "venue": "The Vortex",
+      "date": "2026-06-23",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Jess Bull Anderson",
+      "venue": "Karamel",
+      "date": "2026-05-14",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Evelyn",
+      "venue": "Green Note",
+      "date": "2026-05-13",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Hana Amaya",
+      "venue": "Roundhouse Resident Artist Showcase",
+      "date": "2026-04-23",
+      "ticketUrl": "https://www.roundhouse.org.uk/whats-on/ra-music-2/",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Evelyn",
+      "venue": "Puppet Barge Theatre",
+      "date": "2026-02-26",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Permutations",
+      "venue": "George Tavern",
+      "date": "2026-02-24",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Permutations",
+      "venue": "Windmill Brixton",
+      "date": "2026-02-16",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "NYJO feat. Jasmine Myra",
+      "venue": "Cambridge Arts Center",
+      "date": "2026-02-14",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Composers Workshop Big Band",
+      "venue": "Vortex Jazz club",
+      "date": "2026-02-06",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "ILANJO",
+      "venue": "Next Door Records Shepherd's Bush",
+      "date": "2025-12-10",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Sara Dhillon Quintet",
+      "venue": "EFG London Jazz Festival",
+      "date": "2025-11-18",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Adam Bloor Quartet",
+      "venue": "Old Ivyhouse Jazz Festival",
+      "date": "2025-11-16",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "London Jazz Orchestra",
+      "venue": "",
+      "date": "2025-11-02",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Bill Dixon Index Orchestra",
+      "venue": "",
+      "date": "2025-10-05",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "Sonido Minivan",
+      "venue": "",
+      "date": "2025-09-05",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    },
+    {
+      "title": "NYJO feat. Jas Kayser",
+      "venue": "Peckham Levels",
+      "date": "2025-07-04",
+      "ticketUrl": "",
+      "notes": "",
+      "city": ""
+    }
+  ]
+}

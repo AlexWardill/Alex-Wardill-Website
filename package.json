@@ -4,7 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-content.mjs",
-    "test": "node --test"
+    "build:cms": "node scripts/build-content.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "optimize:images:dry-run": "node scripts/optimize-images.mjs --dry-run",
+    "test": "node --test",
+    "test:cms": "node --test"
   },
   "dependencies": {
     "heic-convert": "^2.1.0",

@@ -10,8 +10,7 @@ media:
     categories: [image]
 
 content:
-  # A single ordered list keeps image ordering and descriptions easy to edit
-  # from a phone. The build exports its entries into the existing image_data.json shape.
+  # One ordered list preserves the existing gallery pages and caption JSON shape.
   - name: gallery_images
     label: Gallery images
     type: file
@@ -43,10 +42,6 @@ content:
               label: Siena
             - name: other
               label: Other
-      - name: gigYear
-        label: Gigs gallery year
-        type: number
-        description: Only used for Gigs; enter 2025 or 2026.
       - name: alt
         label: Alt text
         type: string
@@ -56,7 +51,7 @@ content:
         type: number
         description: Optional numeric position within the gallery; otherwise list order is used.
 
-  # These two lists are moved between and sorted by the daily content build.
+  # These lists are moved between and sorted by the content build.
   - name: upcoming_gigs
     label: Upcoming gigs
     type: file
@@ -81,7 +76,6 @@ content:
       - name: notes
         label: Notes
         type: text
-
   - name: past_gigs
     label: Past gigs
     type: file
@@ -105,7 +99,6 @@ content:
         type: string
       - name: notes
         label: Notes
-
 settings:
   commit:
     templates:

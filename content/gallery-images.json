@@ -1,574 +1,861 @@
 [
   {
+    "image": "/images/Gallery/Portraits/carmen-bibi-079.jpg",
+    "description": "Carmen Llena",
+    "gallery": "portraits",
+    "alt": "Carmen Llena"
+  },
+  {
+    "image": "/images/Gallery/Portraits/mo-24.jpg",
+    "description": "Mo Cook",
+    "gallery": "portraits",
+    "alt": "Mo Cook"
+  },
+  {
+    "image": "/images/Gallery/Portraits/CLO_Trio-17.jpg",
+    "description": "Ombeline Moreira",
+    "gallery": "portraits",
+    "alt": "Ombeline Moreira"
+  },
+  {
+    "image": "/images/Gallery/Portraits/max-30.jpg",
+    "description": "Max Lo",
+    "gallery": "portraits",
+    "alt": "Max Lo"
+  },
+  {
+    "image": "/images/Gallery/Portraits/Ella-Moran-35.jpg",
+    "description": "Ella Moran",
+    "gallery": "portraits",
+    "alt": "Ella Moran"
+  },
+  {
+    "image": "/images/Gallery/Portraits/will-33.jpg",
+    "description": "Will Everitt",
+    "gallery": "portraits",
+    "alt": "Will Everitt"
+  },
+  {
+    "image": "/images/Gallery/Portraits/Colin-10.jpg",
+    "description": "Colin Wilsher",
+    "gallery": "portraits",
+    "alt": "Colin Wilsher"
+  },
+  {
+    "image": "/images/Gallery/Portraits/beat-kathryn.jpg",
+    "description": "Kathryn",
+    "gallery": "portraits",
+    "alt": "Kathryn"
+  },
+  {
+    "image": "/images/Gallery/Portraits/CLO_Trio-02.jpg",
+    "description": "Ombeline Moreira,\nClara Lacout\nLydia Kenny",
+    "gallery": "portraits",
+    "alt": "Ombeline Moreira,"
+  },
+  {
+    "image": "/images/Gallery/Portraits/miles-17.jpg",
+    "description": "Miles Pillinger",
+    "gallery": "portraits",
+    "alt": "Miles Pillinger"
+  },
+  {
+    "image": "/images/Gallery/Portraits/max-09.jpg",
+    "description": "Max Lo",
+    "gallery": "portraits",
+    "alt": "Max Lo"
+  },
+  {
     "image": "/images/Gallery/Portraits/banwen-13.jpg",
-    "description": "Arwen Withey-Harrison\nBanwen Trio\nDec 2025",
+    "description": "Arwen Withey-Harrison\nBanwen Trio",
     "gallery": "portraits",
     "alt": "Arwen Withey-Harrison"
   },
   {
+    "image": "/images/Gallery/Portraits/mo-20.jpg",
+    "description": "Mo Cook",
+    "gallery": "portraits",
+    "alt": "Mo Cook"
+  },
+  {
+    "image": "/images/Gallery/Portraits/carmen-bibi-077.jpg",
+    "description": "Carmen Llena",
+    "gallery": "portraits",
+    "alt": "Carmen Llena"
+  },
+  {
+    "image": "/images/Gallery/Portraits/Jess-Regents.jpg",
+    "description": "Jess Bull Anderson",
+    "gallery": "portraits",
+    "alt": "Jess Bull Anderson"
+  },
+  {
+    "image": "/images/Gallery/Portraits/CLO_Trio-19.jpg",
+    "description": "Ombeline Moreira",
+    "gallery": "portraits",
+    "alt": "Ombeline Moreira"
+  },
+  {
+    "image": "/images/Gallery/Portraits/miles-19.jpg",
+    "description": "Miles Pillinger",
+    "gallery": "portraits",
+    "alt": "Miles Pillinger"
+  },
+  {
+    "image": "/images/Gallery/Portraits/max-54.jpg",
+    "description": "Max Lo",
+    "gallery": "portraits",
+    "alt": "Max Lo"
+  },
+  {
+    "image": "/images/Gallery/Portraits/jamie-03.jpg",
+    "description": "Jamie Harms",
+    "gallery": "portraits",
+    "alt": "Jamie Harms"
+  },
+  {
+    "image": "/images/Gallery/Portraits/carmen-bibi-049.jpg",
+    "description": "Carmen Llena &\nBibi Afshar-Shirazi",
+    "gallery": "portraits",
+    "alt": "Carmen Llena &"
+  },
+  {
     "image": "/images/Gallery/Portraits/banwen-37.jpg",
-    "description": "Belle Brunson\nBanwen Trio\nDec 2025",
+    "description": "Belle Brunson\nBanwen Trio",
     "gallery": "portraits",
     "alt": "Belle Brunson"
   },
   {
-    "image": "/images/Gallery/Portraits/banwen-46.jpg",
-    "description": "Banwen Trio\nDec 2025",
+    "image": "/images/Gallery/Portraits/miles-50.jpg",
+    "description": "Miles Pillinger",
     "gallery": "portraits",
-    "alt": "Banwen Trio"
+    "alt": "Miles Pillinger"
   },
   {
-    "image": "/images/Gallery/Portraits/banwen-53.jpg",
-    "description": "Banwen Trio\nDec 2025",
+    "image": "/images/Gallery/Portraits/Jess-Regents-2.jpg",
+    "description": "Jess Bull Anderson",
     "gallery": "portraits",
-    "alt": "Banwen Trio"
+    "alt": "Jess Bull Anderson"
   },
   {
-    "image": "/images/Gallery/Portraits/carmen-bibi-025.jpg",
-    "description": "Carmen Llena &\nBibi Afshar-Shirazi\nOct 2025",
+    "image": "/images/Gallery/Portraits/CLO_Trio-10.jpg",
+    "description": "Clara Lacout",
     "gallery": "portraits",
-    "alt": "Carmen Llena &"
+    "alt": "Clara Lacout"
   },
   {
-    "image": "/images/Gallery/Portraits/carmen-bibi-045.jpg",
-    "description": "Carmen Llena &\nBibi Afshar-Shirazi\nOct 2025",
+    "image": "/images/Gallery/Portraits/max-kroon-24.jpg",
+    "description": "Max Kroon",
     "gallery": "portraits",
-    "alt": "Carmen Llena &"
-  },
-  {
-    "image": "/images/Gallery/Portraits/carmen-bibi-049.jpg",
-    "description": "Carmen Llena &\nBibi Afshar-Shirazi\nOct 2025",
-    "gallery": "portraits",
-    "alt": "Carmen Llena &"
-  },
-  {
-    "image": "/images/Gallery/Portraits/carmen-bibi-077.jpg",
-    "description": "Carmen Llena\nOct 2025",
-    "gallery": "portraits",
-    "alt": "Carmen Llena"
-  },
-  {
-    "image": "/images/Gallery/Portraits/carmen-bibi-079.jpg",
-    "description": "Carmen Llena\nOct 2025",
-    "gallery": "portraits",
-    "alt": "Carmen Llena"
-  },
-  {
-    "image": "/images/Gallery/Portraits/jamie-03.jpg",
-    "description": "Jamie Harms\nOct 2025",
-    "gallery": "portraits",
-    "alt": "Jamie Harms"
-  },
-  {
-    "image": "/images/Gallery/Portraits/jamie-25.jpg",
-    "description": "Jamie Harms\nOct 2025",
-    "gallery": "portraits",
-    "alt": "Jamie Harms"
+    "alt": "Max Kroon"
   },
   {
     "image": "/images/Gallery/Portraits/jamie-31.jpg",
-    "description": "Jamie Harms\nOct 2025",
+    "description": "Jamie Harms",
     "gallery": "portraits",
     "alt": "Jamie Harms"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/archieKidd-Karamel-02.jpg",
-    "description": "Archie Kidd Quartet\nKaramel\nNov 2025",
+    "image": "/images/Gallery/Gigs/olesa-EFG-08.jpg",
+    "description": "Olesa Zgurskaia\nFrank Hawkes\nEFG London Jazz Festival",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Archie Kidd Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/archieKidd-Karamel-07.jpg",
-    "description": "Archie Kidd Quartet\nLester Ridout\nKaramel\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Archie Kidd Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/archieKidd-Karamel-10.jpg",
-    "description": "Archie Kidd Quartet\nKaramel\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Archie Kidd Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/archieKidd-Karamel-25.jpg",
-    "description": "Archie Kidd Quartet\nKaramel\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Archie Kidd Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/Ed_LF_Quartet-2.webp",
-    "description": "Cameron Scott\nEd Le Feuvre Quartet\nSep 2024",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Cameron Scott"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/Ed_LF_Quartet-3.webp",
-    "description": "Cameron Scott\nEd Le Feuvre Quartet\nSep 2024",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Cameron Scott"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/happy-garden-06.jpg",
-    "description": "Happy Garden\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Happy Garden"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/happy-garden-08.jpg",
-    "description": "Happy Garden\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Happy Garden"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/happy-garden-1.jpg",
-    "description": "Happy Garden\nMo Cook\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Happy Garden"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/Lior-EFGColour-01.jpg",
-    "description": "Lior Solomons-Wise Quartet\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Lior Solomons-Wise Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/Lior-EFGColour-09.jpg",
-    "description": "Lior Solomons-Wise Quartet\nZaki Osahn\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Lior Solomons-Wise Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/Lior-EFGColour-10.jpg",
-    "description": "Lior Solomons-Wise Quartet\nGeorge Johsnon\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Lior Solomons-Wise Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/Lior-EFGColour-19.jpg",
-    "description": "Lior Solomons-Wise Quartet\nSacha Harlan\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Lior Solomons-Wise Quartet"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/lucy&tom-01.jpg",
-    "description": "Thomas Sladden\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Thomas Sladden"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/lucy&tom-15 2.jpg",
-    "description": "Lucy Joy & Thomas Sladden\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Lucy Joy & Thomas Sladden"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/lucy&tom-17 2.jpg",
-    "description": "Lucy Joy & Thomas Sladden\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Lucy Joy & Thomas Sladden"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/ogretones-BTB-AW-23.jpg",
-    "description": "The Ogretones\nBeyond The Bridge\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "The Ogretones"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/ogretones-BTB-AW-31.jpg",
-    "description": "The Ogretones\nBeyond The Bridge\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "The Ogretones"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/ogretones-BTB-AW-34.jpg",
-    "description": "The Ogretones\nBeyond The Bridge\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "The Ogretones"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/ogretones-BTB-AW-35.jpg",
-    "description": "The Ogretones\nBeyond The Bridge\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "The Ogretones"
-  },
-  {
-    "image": "/images/Gallery/Gigs 2025/olesa-EFG-04.jpg",
-    "description": "Olesa Zgurskaia\nEFG London Jazz Festival\nNov 2025",
-    "gallery": "gigs",
-    "gigYear": 2025,
     "alt": "Olesa Zgurskaia"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/olesa-EFG-08.jpg",
-    "description": "Olesa Zgurskaia\nFrank Hawkes\nEFG London Jazz Festival\nNov 2025",
+    "image": "/images/Gallery/Gigs/odwc-colour-02.jpg",
+    "description": "Our Day Will Come Reunion Gig",
     "gallery": "gigs",
-    "gigYear": 2025,
+    "alt": "Our Day Will Come Reunion Gig"
+  },
+  {
+    "image": "/images/Gallery/Gigs/zach-donovan-6.jpg",
+    "description": "Zach Sholapurkar & Donovan Haffner\nSacha Harlan\nMap Studio Cafe",
+    "gallery": "gigs",
+    "alt": "Zach Sholapurkar & Donovan Haffner"
+  },
+  {
+    "image": "/images/Gallery/Gigs/happy-garden-06.jpg",
+    "description": "Happy Garden\nEFG London Jazz Festival",
+    "gallery": "gigs",
+    "alt": "Happy Garden"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-luke-mccarthy-1.jpg",
+    "description": "Luke McCarthy\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Luke McCarthy at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/happy-garden-08.jpg",
+    "description": "Happy Garden\nEFG London Jazz Festival",
+    "gallery": "gigs",
+    "alt": "Happy Garden"
+  },
+  {
+    "image": "/images/Gallery/Gigs/oto-bill-dixon-101-4.jpg",
+    "description": "Bill Dixon 101\nCafe OTO",
+    "gallery": "gigs",
+    "alt": "Bill Dixon 101"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-mali-2.jpg",
+    "description": "Mali Sheard\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Mali Sheard at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/olesa-EFG-08-2026.jpg",
+    "description": "Olesa Zgurskaia\nEFG London Jazz Festival",
+    "gallery": "gigs",
     "alt": "Olesa Zgurskaia"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/olesa-EFG-10.jpg",
-    "description": "Olesa Zgurskaia\nGustavo CM\nEFG London Jazz Festival\nNov 2025",
+    "image": "/images/Gallery/Gigs/oto-bill-dixon-101-2.jpg",
+    "description": "Bill Dixon 101\nCafe OTO",
     "gallery": "gigs",
-    "gigYear": 2025,
+    "alt": "Bill Dixon 101"
+  },
+  {
+    "image": "/images/Gallery/Gigs/carmen-alvaro-13.jpg",
+    "description": "Carmen Llena",
+    "gallery": "gigs",
+    "alt": "Carmen Llena"
+  },
+  {
+    "image": "/images/Gallery/Gigs/joewebb606-6.jpg",
+    "description": "Joe Webb\n606 Club",
+    "gallery": "gigs",
+    "alt": "Joe Webb"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-nyjo-miles-100-1.jpg",
+    "description": "NYJO Miles 100\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "NYJO Miles 100 at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/knuckleball-07.jpg",
+    "description": "Stephen Haynes\nKnuckleball\nVortex Jazz Club",
+    "gallery": "gigs",
+    "alt": "Stephen Haynes"
+  },
+  {
+    "image": "/images/Gallery/Gigs/odwc-colour-07.jpg",
+    "description": "Our Day Will Come Reunion Gig",
+    "gallery": "gigs",
+    "alt": "Our Day Will Come Reunion Gig"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-kokoroko-4.jpg",
+    "description": "Kokoroko\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Kokoroko at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-moses-boyd-4.jpg",
+    "description": "Moses Boyd\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Moses Boyd at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Lior-EFGColour-19.jpg",
+    "description": "Sacha Harlan\nEFG London Jazz Festival",
+    "gallery": "gigs",
+    "alt": "Sacha Harlan"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-samara-joy-5.jpg",
+    "description": "Samara Joy\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Samara Joy at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-esperanza-spalding-1.jpg",
+    "description": "Esperanza Spalding\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Esperanza Spalding at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/carmen-alvaro-16 2.jpg",
+    "description": "Carmen Llena",
+    "gallery": "gigs",
+    "alt": "Carmen Llena"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ogretones-BTB-AW-31.jpg",
+    "description": "The Ogretones\nBeyond The Bridge",
+    "gallery": "gigs",
+    "alt": "The Ogretones"
+  },
+  {
+    "image": "/images/Gallery/Gigs/archieKidd-Karamel-10.jpg",
+    "description": "Archie Kidd Quartet\nKaramel",
+    "gallery": "gigs",
+    "alt": "Archie Kidd Quartet"
+  },
+  {
+    "image": "/images/Gallery/Gigs/olesa-EFG-10.jpg",
+    "description": "Olesa Zgurskaia\nGustavo CM\nEFG London Jazz Festival",
+    "gallery": "gigs",
     "alt": "Olesa Zgurskaia"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/Oskar-03.jpg",
-    "description": "Oskar Jones Quintet\nEFG London Jazz Festival\nNov 2025",
+    "image": "/images/Gallery/Gigs/orchard-29 2.jpg",
+    "description": "Orchard\nRoyah Albert Hall Elgar Room",
     "gallery": "gigs",
-    "gigYear": 2025,
+    "alt": "Orchard"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Oskar-04.jpg",
+    "description": "Oskar Jones Quintet\nEFG London Jazz Festival",
+    "gallery": "gigs",
     "alt": "Oskar Jones Quintet"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/Oskar-04.jpg",
-    "description": "Oskar Jones Quintet\nEFG London Jazz Festival\nNov 2025",
+    "image": "/images/Gallery/Gigs/ls-moses-boyd-6.jpg",
+    "description": "Moses Boyd\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Oskar Jones Quintet"
+    "alt": "Moses Boyd at Love Supreme"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/ridouts-05.jpg",
-    "description": "Tom Ridout\nEFG London Jazz Festival\nNov 2025",
+    "image": "/images/Gallery/Gigs/knuckleball-31.jpg",
+    "description": "Alex Bonney\nKnuckleball\nVortex Jazz Club",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Tom Ridout"
+    "alt": "Alex Bonney"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/ridouts-11.jpg",
-    "description": "Ridout Brothers\nEFG London Jazz Festival\nNov 2025",
+    "image": "/images/Gallery/Gigs/SGB-bluesKitchen-01.jpg",
+    "description": "She's Got Brass\nBlues Kitchen",
     "gallery": "gigs",
-    "gigYear": 2025,
+    "alt": "She's Got Brass"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-olivia-1.jpg",
+    "description": "Olivia Cuttil\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Olivia Cuttil at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-qow-3.jpg",
+    "description": "QOW Trio\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "QOW Trio at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/orchard-72 2.jpg",
+    "description": "Orchard\nRoyah Albert Hall Elgar Room",
+    "gallery": "gigs",
+    "alt": "Orchard"
+  },
+  {
+    "image": "/images/Gallery/Gigs/betweenrivers-half-moon-01.jpg",
+    "description": "Between Rivers",
+    "gallery": "gigs",
+    "alt": "Between Rivers"
+  },
+  {
+    "image": "/images/Gallery/Gigs/knuckleball-35.jpg",
+    "description": "Alex Bonney\nKnuckleball\nVortex Jazz Club",
+    "gallery": "gigs",
+    "alt": "Alex Bonney"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Lior-EFGColour-01.jpg",
+    "description": "Lior Solomons-Wise Quartet\nEFG London Jazz Festival",
+    "gallery": "gigs",
+    "alt": "Lior Solomons-Wise Quartet"
+  },
+  {
+    "image": "/images/Gallery/Gigs/olesa-EFG-04.jpg",
+    "description": "Olesa Zgurskaia\nEFG London Jazz Festival",
+    "gallery": "gigs",
+    "alt": "Olesa Zgurskaia"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-qow-2.jpg",
+    "description": "QOW Trio\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "QOW Trio at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ridouts-11.jpg",
+    "description": "Ridout Brothers\nEFG London Jazz Festival",
+    "gallery": "gigs",
     "alt": "Ridout Brothers"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/SGB-bluesKitchen-01.jpg",
-    "description": "She's Got Brass\nBlues Kitchen\nSep 2025",
+    "image": "/images/Gallery/Gigs/Lior-EFGColour-09.jpg",
+    "description": "Zaki Osahn\nEFG London Jazz Festival",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "She's Got Brass"
+    "alt": "Zaki Osahn"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/SGB-bluesKitchen-07.jpg",
-    "description": "She's Got Brass\nBlues Kitchen\nSep 2025",
+    "image": "/images/Gallery/Gigs/lucy&tom-17 2.jpg",
+    "description": "Lucy Joy & Thomas Sladden\nEFG London Jazz Festival",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "She's Got Brass"
+    "alt": "Lucy Joy & Thomas Sladden"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/Trish_Vortex-3.jpg",
-    "description": "Trish Clowes\nVortex Jazz Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/ls-lovano-4.jpg",
+    "description": "Joe Lovano\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Trish Clowes"
+    "alt": "Joe Lovano at Love Supreme"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/Trish_Vortex-5.jpg",
-    "description": "Trish Clowes\nVortex Jazz Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/ogretones-BTB-AW-23.jpg",
+    "description": "The Ogretones\nBeyond The Bridge",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Trish Clowes"
+    "alt": "The Ogretones"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/Trish_Vortex-7.jpg",
-    "description": "Trish Clowes\nVortex Jazz Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/ls-emma-1.jpg",
+    "description": "Emma Rawicz\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Trish Clowes"
+    "alt": "Emma Rawicz at Love Supreme"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/winston_606-10.jpg",
-    "description": "Winston Clifford\nRiley Stone-Logan\n606 Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/orchard-37 2.jpg",
+    "description": "Orchard\nRoyah Albert Hall Elgar Room",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Winston Clifford"
+    "alt": "Orchard"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/winston_606-12.jpg",
-    "description": "Winston Clifford\nOli Hayhurts\n606 Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/orchard-02 2.jpg",
+    "description": "Orchard\nRoyah Albert Hall Elgar Room",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Winston Clifford"
+    "alt": "Orchard"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/winston_606-16.jpg",
-    "description": "Winston Clifford\nBruno Heinen\n606 Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/ls-kokoroko-1.jpg",
+    "description": "Kokoroko\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Winston Clifford"
+    "alt": "Kokoroko at Love Supreme"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/winston_606-20.jpg",
-    "description": "Winston Clifford\n606 Club\nJan 2025",
+    "image": "/images/Gallery/Gigs/ls-mali-5.jpg",
+    "description": "Mali Sheard\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Winston Clifford"
+    "alt": "Mali Sheard at Love Supreme"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/zach-donovan-4.jpg",
-    "description": "Zach Sholapurkar & Donovan Haffner\nMap Studio Cafe\nNov 2025",
+    "image": "/images/Gallery/Gigs/odwc-colour-06.jpg",
+    "description": "Our Day Will Come Reunion Gig",
     "gallery": "gigs",
-    "gigYear": 2025,
+    "alt": "Our Day Will Come Reunion Gig"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-emma-2.jpg",
+    "description": "Emma Rawicz\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Emma Rawicz at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/knuckleball-21.jpg",
+    "description": "Annie Morris\nKnuckleball\nVortex Jazz Club",
+    "gallery": "gigs",
+    "alt": "Annie Morris"
+  },
+  {
+    "image": "/images/Gallery/Gigs/zach-donovan-4.jpg",
+    "description": "Zach Sholapurkar & Donovan Haffner\nMap Studio Cafe",
+    "gallery": "gigs",
     "alt": "Zach Sholapurkar & Donovan Haffner"
   },
   {
-    "image": "/images/Gallery/Gigs 2025/zach-donovan-6.jpg",
-    "description": "Zach Sholapurkar & Donovan Haffner\nSacha Harlan\nMap Studio Cafe\nNov 2025",
+    "image": "/images/Gallery/Gigs/lucy&tom-15 2.jpg",
+    "description": "Lucy Joy & Thomas Sladden\nEFG London Jazz Festival",
     "gallery": "gigs",
-    "gigYear": 2025,
-    "alt": "Zach Sholapurkar & Donovan Haffner"
+    "alt": "Lucy Joy & Thomas Sladden"
   },
   {
-    "image": "/images/Gallery/Gigs 2026/orchard-jago-02.jpg",
-    "description": "Orchard\nDiarra Walcott-Ivanhoe\nThe Jago\nFeb 2026",
+    "image": "/images/Gallery/Gigs/ls-lovano-1.jpg",
+    "description": "Joe Lovano\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2026,
+    "alt": "Joe Lovano at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/joewebb606-5.jpg",
+    "description": "Joe Webb\n606 Club",
+    "gallery": "gigs",
+    "alt": "Joe Webb"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-nyjo-miles-100-2.jpg",
+    "description": "NYJO Miles 100\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "NYJO Miles 100 at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/moses-boyd-love-supreme-1.jpg",
+    "description": "Moses Boyd\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Moses Boyd"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-ezra-2.jpg",
+    "description": "Ezra Collective\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Ezra Collective at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-bill-frisell-2.jpg",
+    "description": "Gregory Tardy\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Bill Frisell at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/winston_606-12.jpg",
+    "description": "Winston Clifford\nOli Hayhurts\n606 Club",
+    "gallery": "gigs",
+    "alt": "Winston Clifford"
+  },
+  {
+    "image": "/images/Gallery/Gigs/odwc-b&w-27.jpg",
+    "description": "Our Day Will Come Reunion Gig",
+    "gallery": "gigs",
+    "alt": "Our Day Will Come Reunion Gig"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ridouts-05.jpg",
+    "description": "Tom Ridout\nEFG London Jazz Festival",
+    "gallery": "gigs",
+    "alt": "Tom Ridout"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Trish_Vortex-3.jpg",
+    "description": "Trish Clowes\nVortex Jazz Club",
+    "gallery": "gigs",
+    "alt": "Trish Clowes"
+  },
+  {
+    "image": "/images/Gallery/Gigs/orchard-PEx-bw-4.jpg",
+    "description": "Orchard\nPizza Express Live",
+    "gallery": "gigs",
     "alt": "Orchard"
   },
   {
-    "image": "/images/Gallery/Gigs 2026/orchard-jago-04.jpg",
-    "description": "Orchard\nDiarra Walcott-Ivanhoe\nThe Jago\nFeb 2026",
+    "image": "/images/Gallery/Gigs/ls-bill-frisell-4.jpg",
+    "description": "Bill Frisell\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2026,
+    "alt": "Bill Frisell at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/betweenrivers-paperdress-17.jpg",
+    "description": "Between Rivers\nManuel Humeran",
+    "gallery": "gigs",
+    "alt": "Between Rivers"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Ed_LF_Quartet-2.webp",
+    "description": "Cameron Scott\nEd Le Feuvre Quartet",
+    "gallery": "gigs",
+    "alt": "Cameron Scott"
+  },
+  {
+    "image": "/images/Gallery/Gigs/winston_606-16.jpg",
+    "description": "Winston Clifford\nBruno Heinen\n606 Club",
+    "gallery": "gigs",
+    "alt": "Winston Clifford"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Trish_Vortex-7.jpg",
+    "description": "Trish Clowes\nVortex Jazz Club",
+    "gallery": "gigs",
+    "alt": "Trish Clowes"
+  },
+  {
+    "image": "/images/Gallery/Gigs/betweenrivers-paperdress-07.jpg",
+    "description": "Between Rivers\nNoah Chiari",
+    "gallery": "gigs",
+    "alt": "Between Rivers"
+  },
+  {
+    "image": "/images/Gallery/Gigs/odwc-b&w-47.jpg",
+    "description": "Our Day Will Come Reunion Gig",
+    "gallery": "gigs",
+    "alt": "Our Day Will Come Reunion Gig"
+  },
+  {
+    "image": "/images/Gallery/Gigs/orchard-jago-04.jpg",
+    "description": "Orchard\nDiarra Walcott-Ivanhoe\nThe Jago",
+    "gallery": "gigs",
     "alt": "Orchard"
   },
   {
-    "image": "/images/Gallery/Gigs 2026/orchard-jago-06.jpg",
-    "description": "Orchard\nThe Jago\nFeb 2026",
+    "image": "/images/Gallery/Gigs/ls-bill-frisell-3.jpg",
+    "description": "Bill Frisell\nLove Supreme",
     "gallery": "gigs",
-    "gigYear": 2026,
+    "alt": "Bill Frisell at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/ls-bill-frisell-1.jpg",
+    "description": "Rudy Royston\nLove Supreme",
+    "gallery": "gigs",
+    "alt": "Bill Frisell at Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Gigs/Ed_LF_Quartet-3.webp",
+    "description": "Cameron Scott\nEd Le Feuvre Quartet",
+    "gallery": "gigs",
+    "alt": "Cameron Scott"
+  },
+  {
+    "image": "/images/Gallery/Gigs/orchard-PEx-bw-2.jpg",
+    "description": "Orchard\nPizza Express Live",
+    "gallery": "gigs",
     "alt": "Orchard"
   },
   {
-    "image": "/images/Gallery/Gigs 2026/orchard-jago-09.jpg",
-    "description": "Orchard\nMo Cook\nThe Jago\nFeb 2026",
+    "image": "/images/Gallery/Gigs/orchard-PEx-bw-3.jpg",
+    "description": "Orchard\nPizza Express Live",
     "gallery": "gigs",
-    "gigYear": 2026,
     "alt": "Orchard"
   },
   {
-    "image": "/images/Gallery/Gigs 2026/orchard-jago-17.jpg",
-    "description": "Orchard\nJemima Whyte\nThe Jago\nFeb 2026",
+    "image": "/images/Gallery/Gigs/winston_606-20.jpg",
+    "description": "Winston Clifford\n606 Club",
     "gallery": "gigs",
-    "gigYear": 2026,
-    "alt": "Orchard"
+    "alt": "Winston Clifford"
   },
   {
-    "image": "/images/Gallery/Siena/Sienav1-001.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "image": "/images/Gallery/Siena/Sienav1-115.jpg",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-002.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-003.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-004.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-006.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-008.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-010.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-011.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-012.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-027.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-029.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-037.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-041.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-047.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-050.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-051.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-054.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-056.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-062.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-067.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-070.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-071.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-077.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-086.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-1.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-100.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-103.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-108.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-109.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-110.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
-    "gallery": "siena",
-    "alt": "Siena Jazz Summer Workshop"
-  },
-  {
-    "image": "/images/Gallery/Siena/Sienav1-115.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-119.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
   },
   {
     "image": "/images/Gallery/Siena/Sienav1-125.jpg",
-    "description": "Siena Jazz Summer Workshop\nAug 2025",
+    "description": "Siena Jazz Summer Workshop",
     "gallery": "siena",
     "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-001.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-003.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-004.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-006.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-008.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-010.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Siena/Sienav1-011.jpg",
+    "description": "Siena Jazz Summer Workshop",
+    "gallery": "siena",
+    "alt": "Siena Jazz Summer Workshop"
+  },
+  {
+    "image": "/images/Gallery/Other/love supreme-02.jpg",
+    "description": "Love Supreme",
+    "gallery": "other",
+    "alt": "Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Other/love supreme-04.jpg",
+    "description": "Love Supreme",
+    "gallery": "other",
+    "alt": "Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Other/love supreme-14.jpg",
+    "description": "Love Supreme",
+    "gallery": "other",
+    "alt": "Love Supreme"
+  },
+  {
+    "image": "/images/Gallery/Other/shambala-36.jpg",
+    "description": "Shambala",
+    "gallery": "other",
+    "alt": "Shambala"
+  },
+  {
+    "image": "/images/Gallery/Other/shambala-41.jpg",
+    "description": "Shambala",
+    "gallery": "other",
+    "alt": "Shambala"
+  },
+  {
+    "image": "/images/Gallery/Other/shambala-44.jpg",
+    "description": "Shambala",
+    "gallery": "other",
+    "alt": "Shambala"
+  },
+  {
+    "image": "/images/Gallery/Other/shambala-45.jpg",
+    "description": "Shambala",
+    "gallery": "other",
+    "alt": "Shambala"
   },
   {
     "image": "/images/Gallery/Other/earring.JPG",
@@ -578,19 +865,19 @@
   },
   {
     "image": "/images/Gallery/Other/Tokyo - Building.jpg",
-    "description": "Tokyo\nFeb 2024",
+    "description": "Tokyo",
     "gallery": "other",
     "alt": "Tokyo"
   },
   {
     "image": "/images/Gallery/Other/Tokyo - Crossing.jpg",
-    "description": "Tokyo\nFeb 2024",
+    "description": "Tokyo",
     "gallery": "other",
     "alt": "Tokyo"
   },
   {
     "image": "/images/Gallery/Other/Tokyo - Jellyfish.jpg",
-    "description": "Tokyo\nFeb 2024",
+    "description": "Tokyo",
     "gallery": "other",
     "alt": "Tokyo"
   }

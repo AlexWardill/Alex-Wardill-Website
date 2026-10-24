@@ -1,32 +1,26 @@
 # Alex Wardill Website
 
-Static portfolio site with Pages CMS content editing.
+Static portfolio website with Pages CMS content management.
 
-## Build and test
+## Local build and test
 
 1. Install dependencies with `npm ci`.
 2. Run `npm test`.
-3. Run `npm run build` to resize new gallery uploads, sort the CMS data, and regenerate the pages and `image_data.json`.
-4. Preview locally with `python -m http.server 8000`.
+3. Run `npm run build` to optimize new uploads, sort gig lists, update the existing gallery pages, and generate the site's CMS data.
+4. Start a preview with `python -m http.server 8000`, then open `http://localhost:8000/`.
 
 ## Pages CMS
 
-- Add the repository to Pages CMS and select the `develop` branch while testing.
-- Gallery images are managed as one draggable list in `content/gallery-images.json`. The current grouped `image_data.json` format remains the website-facing output.
-- Select Portraits, Gigs, Siena, or Other per image. For Gigs, choose the year (2025 or 2026) to preserve the site's existing year-specific pages.
-- Upload JPG, JPEG, PNG, WebP, or iPhone HEIC/HEIF images through Gallery uploads. Originals are stored in `_uploads/gallery/`; the build creates resized versions (maximum 2560 pixels) in `images/optimized/gallery/`, with WebP plus a same-format fallback where needed.
-- Upcoming gigs and Past gigs are separate editable lists in `content/gigs-upcoming.json` and `content/gigs-past.json`. The build moves entries across the date boundary and sorts each list using `Europe/London`.
+- During testing, add the repository to Pages CMS and select the `develop` branch.
+- Gallery images are managed in one draggable list at `content/gallery-images.json`; existing routes under `/gallery-portraits/`, `/gallery-gigs/`, `/gallery-siena/`, and `/gallery-other/` are retained.
+- Upload JPG, JPEG, PNG, WebP, HEIC, or HEIF images through Gallery uploads. CMS originals are stored in `_uploads/gallery/` and excluded from publication; the build writes resized, public copies under `images/optimized/gallery/`.
+- Image entries contain the gallery, alt text, and carousel description. Dragging controls order; the optional numeric order field is available for precise sorting.
+- Upcoming gigs and Past gigs are separate editable lists at `content/gigs-upcoming.json` and `content/gigs-past.json`. Build-time sorting uses the `Europe/London` date boundary and the current Gigs page layout.
 
-## GitHub Actions and publishing
+## GitHub Actions and production safety
 
-The Build CMS content workflow runs on pushes to `develop` and `production`, and its scheduled run targets `develop`. It commits generated content when needed. Commits made with the Actions token do not start another workflow run. A push to `production` builds and deploys the static site to GitHub Pages; Jekyll excludes the `_uploads/` directory from the published site. While testing, keep the workflow on `develop` and do not change the live Pages source or merge it to `production`.
+The Build CMS content workflow validates and builds changes on `develop`; generated files are committed back to that branch. Its scheduled run targets `develop`. A production push is configured to deploy the site, but this work is not authorized for production yet. Do not merge these changes or change the live Pages settings until production promotion is explicitly approved.
 
-For `develop` testing:
+For testing, authorize Pages CMS to access `develop` and push CMS edits there. Repository Actions already has write permission. GitHub only activates scheduled workflows when the workflow is present on the default branch, so the daily run will not activate until the workflow is promoted to that branch.
 
-1. Allow Actions to read and write repository contents. The repository is currently configured with write access.
-2. Add the repository to Pages CMS and grant it access to the `develop` branch.
-3. Push changes to `develop`. The workflow validates, builds, and commits generated changes on `develop`; it does not deploy Pages from that branch.
-
-GitHub only runs scheduled workflows, and enables manual dispatch, from workflow files on the repository's default branch. Those options will therefore not become available until the workflow reaches the default branch. Do not merge it to `production` or change the live Pages source until production promotion is authorized.
-
-Gig listings are fully managed in Pages CMS; no external credentials are needed.
+The existing production site uses directory routes (for example `/gigs/`); local previews use the same paths.

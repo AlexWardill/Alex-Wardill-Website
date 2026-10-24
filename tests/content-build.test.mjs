@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import sharp from 'sharp';
 import {
+  GALLERY_PAGES,
   optimizeGalleryImages,
   publicGalleryImagePath,
   sortGalleryEntries,
@@ -55,7 +56,6 @@ test('optional gig and gallery fields may be left blank in the CMS', () => {
       description: '',
       gallery: 'other',
       alt: 'Test photo',
-      gigYear: null,
       order: null,
     },
   ]), [{
@@ -95,19 +95,22 @@ test('gallery entries reject paths outside the site image folder', () => {
   );
 });
 
-test('Gigs gallery keeps its year-specific pages and validates the year', () => {
-  const entries = sortGalleryEntries([
-    { image: 'images/Gallery/Gigs 2026/shared.jpg', description: 'Later', gallery: 'gigs', gigYear: 2026, alt: 'Later' },
-    { image: 'images/Gallery/Gigs 2025/shared.jpg', description: 'Earlier', gallery: 'gigs', gigYear: 2025, alt: 'Earlier' },
-  ]);
+test('galleries use the current production routes and keep Gigs in one list', () => {
+  assert.deepEqual(GALLERY_PAGES, {
+    portraits: 'gallery-portraits/index.html',
+    gigs: 'gallery-gigs/index.html',
+    siena: 'gallery-siena/index.html',
+    other: 'gallery-other/index.html',
+  });
 
-  assert.deepEqual(entries.map(({ gigYear }) => gigYear), [2025, 2026]);
-  assert.throws(
-    () => sortGalleryEntries([
-      { image: 'images/Gallery/Gigs/shared.jpg', description: 'Missing year', gallery: 'gigs', alt: 'Gig' },
-    ]),
-    /must set gigYear to 2025 or 2026/i,
-  );
+  const entries = sortGalleryEntries([
+    { image: 'images/Gallery/Gigs/later.jpg', description: 'Later', gallery: 'gigs', alt: 'Later' },
+    { image: 'images/Gallery/Gigs/earlier.jpg', description: 'Earlier', gallery: 'gigs', alt: 'Earlier' },
+  ]);
+  assert.deepEqual(entries.map(({ image }) => image), [
+    '/images/Gallery/Gigs/later.jpg',
+    '/images/Gallery/Gigs/earlier.jpg',
+  ]);
 });
 
 test('HEIC uploads render through a JPEG fallback', () => {

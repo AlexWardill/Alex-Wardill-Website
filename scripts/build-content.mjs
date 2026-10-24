@@ -12,17 +12,17 @@ const gallerySourcePath = path.join(rootDir, 'content', 'gallery-images.json');
 const imageDataPath = path.join(rootDir, 'image_data.json');
 const upcomingGigsPath = path.join(rootDir, 'content', 'gigs-upcoming.json');
 const pastGigsPath = path.join(rootDir, 'content', 'gigs-past.json');
-const gigsHtmlPath = path.join(rootDir, 'gigs.html');
+const cmsGigDataPath = path.join(rootDir, 'data', 'cms-content.json');
+const gigsHtmlPath = path.join(rootDir, 'gigs', 'index.html');
 const galleryOriginalsPath = path.join(rootDir, '_uploads', 'gallery');
 const galleryOptimizedPath = path.join(rootDir, 'images', 'optimized', 'gallery');
 const imageManifestPath = path.join(rootDir, '_uploads', '.gallery-image-manifest.json');
 
 export const GALLERY_PAGES = {
-  portraits: 'gallery-portraits.html',
-  gigs_2025: 'gallery-gigs-2025.html',
-  gigs_2026: 'gallery-gigs-2026.html',
-  siena: 'gallery-siena.html',
-  other: 'gallery-other.html',
+  portraits: 'gallery-portraits/index.html',
+  gigs: 'gallery-gigs/index.html',
+  siena: 'gallery-siena/index.html',
+  other: 'gallery-other/index.html',
 };
 
 const GALLERY_ORDER = ['portraits', 'gigs', 'siena', 'other'];
@@ -129,9 +129,6 @@ function validateGalleryImage(entry, index) {
   const order = entry.order === '' || entry.order === null || entry.order === undefined
     ? undefined
     : entry.order;
-  const gigYear = entry.gigYear === '' || entry.gigYear === null || entry.gigYear === undefined
-    ? undefined
-    : Number(entry.gigYear);
   if (typeof image !== 'string' || !image.trim()) {
     throw new Error(`Gallery image ${index + 1} is missing an image path.`);
   }
@@ -140,12 +137,6 @@ function validateGalleryImage(entry, index) {
   }
   if (!GALLERY_ORDER.includes(gallery)) {
     throw new Error(`Gallery image ${index + 1} has an unsupported gallery "${gallery ?? ''}".`);
-  }
-  if (gallery === 'gigs' && ![2025, 2026].includes(gigYear)) {
-    throw new Error(`Gallery image ${index + 1} must set gigYear to 2025 or 2026 for the Gigs gallery.`);
-  }
-  if (gigYear !== undefined && ![2025, 2026].includes(gigYear)) {
-    throw new Error(`Gallery image ${index + 1} gigYear must be 2025 or 2026 when provided.`);
   }
   if (typeof alt !== 'string' || !alt.trim()) {
     throw new Error(`Gallery image ${index + 1} is missing alt text.`);
@@ -163,7 +154,6 @@ function validateGalleryImage(entry, index) {
     image: `/${imagePath}`,
     description,
     gallery,
-    ...(gigYear === undefined ? {} : { gigYear }),
     alt: alt.trim(),
     ...(order === undefined ? {} : { order }),
     sourceIndex: index,
@@ -171,7 +161,7 @@ function validateGalleryImage(entry, index) {
 }
 
 function gallerySection(entry) {
-  return entry.gallery === 'gigs' ? `gigs_${entry.gigYear}` : entry.gallery;
+  return entry.gallery;
 }
 
 export function sortGalleryEntries(entries) {
@@ -193,11 +183,8 @@ export function sortGalleryEntries(entries) {
 
   normalized.sort((left, right) => {
     const galleryComparison = GALLERY_ORDER.indexOf(left.gallery) - GALLERY_ORDER.indexOf(right.gallery);
-    const yearComparison = left.gallery === 'gigs' && right.gallery === 'gigs'
-      ? left.gigYear - right.gigYear
-      : 0;
     const orderComparison = (left.order ?? left.sourceIndex) - (right.order ?? right.sourceIndex);
-    return galleryComparison || yearComparison || orderComparison || left.sourceIndex - right.sourceIndex;
+    return galleryComparison || orderComparison || left.sourceIndex - right.sourceIndex;
   });
 
   return normalized.map(({ sourceIndex, ...entry }) => entry);
@@ -278,13 +265,31 @@ async function renderGalleryImage(entry) {
   if (!await fileExists(diskPath)) {
     throw new Error(`Gallery image is missing its published file: ${publicImagePath}`);
   }
-  const imagePath = htmlEscape(publicImagePath);
-  const webpPath = await hasWebpVariant(publicImagePath);
-  const image = `<img src="${imagePath}" alt="${htmlEscape(entry.alt)}" data-caption="" data-section="${htmlEscape(entry.gallery)}" loading="lazy">`;
-  const picture = webpPath
-    ? `<picture><source srcset="${htmlEscape(webpPath)}" type="image/webp">${image}</picture>`
-    : image;
-  return `                <div class="gallery-item">${picture}</div>`;
+  const isCmsUpload = publicImagePath.startsWith('/images/optimized/gallery/');
+  const fullImagePath = isCmsUpload ? publicImagePath : entry.image;
+  let displayImagePath = publicImagePath;
+  let srcSet = '';
+
+  if (isCmsUpload) {
+    displayImagePath = await hasWebpVariant(publicImagePath) ?? publicImagePath;
+  } else {
+    const optimizedBase = publicImagePath.replace(/^\/images\//, '/images/optimized/').replace(/\.[^.]+$/, '');
+    const optimizedSmall = `${optimizedBase}-400.webp`;
+    const optimizedLarge = `${optimizedBase}-800.webp`;
+    const smallDiskPath = path.join(rootDir, optimizedSmall.replace(/^\/+/, ''));
+    const largeDiskPath = path.join(rootDir, optimizedLarge.replace(/^\/+/, ''));
+    if (await fileExists(largeDiskPath)) {
+      displayImagePath = optimizedLarge;
+      if (await fileExists(smallDiskPath)) {
+        srcSet = ` srcset="${htmlEscape(optimizedSmall)} 400w, ${htmlEscape(optimizedLarge)} 800w" sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 33vw"`;
+      }
+    } else if (await fileExists(smallDiskPath)) {
+      displayImagePath = optimizedSmall;
+    }
+  }
+
+  const image = `<img src="${htmlEscape(displayImagePath)}" alt="${htmlEscape(entry.alt)}" data-caption="" data-section="${htmlEscape(entry.gallery)}" loading="lazy" decoding="async" data-full-src="${htmlEscape(fullImagePath)}"${srcSet}>`;
+  return `                <div class="gallery-item">${image}</div>`;
 }
 
 function replaceGigMarkerBlock(html, [startMarker, endMarker], markup) {
@@ -318,7 +323,7 @@ function formatGigDate(value) {
 
 function renderGig(gig, isUpcoming) {
   const classes = isUpcoming ? 'gig-item upcoming-gig' : 'gig-item gig-item-simple';
-  const city = gig.city ? ` <span class="gig-city">${htmlEscape(gig.city)}</span>` : '';
+  const city = gig.city ? `<span class="gig-city"> — ${htmlEscape(gig.city)}</span>` : '';
   const notes = gig.notes ? `<div class="gig-notes">${htmlEscape(gig.notes)}</div>` : '';
   return `                <div class="${classes}" data-ticket-link="${htmlEscape(gig.ticketLink)}">
                     <div class="gig-venue">${htmlEscape(gig.venue)}${city}${notes}</div>
@@ -469,6 +474,19 @@ async function buildGigs() {
   const { upcoming, past } = splitAndSortGigs(upcomingSource, pastSource, todayInTimeZone());
   await fs.writeFile(upcomingGigsPath, `${JSON.stringify(upcoming, null, 2)}\n`, 'utf8');
   await fs.writeFile(pastGigsPath, `${JSON.stringify(past, null, 2)}\n`, 'utf8');
+
+  const cmsGigs = [...upcoming, ...past].map((gig) => {
+    const separator = gig.venue.lastIndexOf(' @ ');
+    return {
+      title: separator < 0 ? gig.venue : gig.venue.slice(0, separator),
+      venue: separator < 0 ? '' : gig.venue.slice(separator + 3),
+      date: gig.date,
+      ticketUrl: gig.ticketLink,
+      notes: gig.notes,
+      city: gig.city,
+    };
+  });
+  await fs.writeFile(cmsGigDataPath, `${JSON.stringify({ gigs: cmsGigs }, null, 2)}\n`, 'utf8');
 
   let html = await fs.readFile(gigsHtmlPath, 'utf8');
   html = replaceGigMarkerBlock(html, GIG_MARKERS.upcoming, upcoming.map((gig) => renderGig(gig, true)).join('\n'));
