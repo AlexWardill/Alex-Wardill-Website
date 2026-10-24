@@ -442,9 +442,14 @@ body,
     max-width: 1200px;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 820px);
+    justify-content: center;
     gap: 1.25rem;
     align-items: flex-start;
+}
+
+.about-content {
+    order: 1;
 }
 
 .about-title {
@@ -499,6 +504,8 @@ body,
 }
 
 .about-image {
+    order: 2;
+    margin-bottom: 2rem;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -515,19 +522,6 @@ body,
 
 .about-section-alt {
     background-color: #ffffff;
-}
-
-.about-container-reverse {
-    grid-template-columns: 1fr 1fr;
-}
-
-.about-container-centered {
-    align-items: center;
-}
-
-.about-container-single {
-    grid-template-columns: minmax(0, 820px);
-    justify-content: center;
 }
 
 /* Gigs Section */
@@ -1493,20 +1487,7 @@ main > .gigs-section:first-child {
     }
 
     .about-container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .about-container-reverse {
-        grid-template-columns: 1fr;
-    }
-
-    .about-container-reverse .about-content {
-        order: 1;
-    }
-
-    .about-container-reverse .about-image {
-        order: 2;
+        gap: 1rem;
     }
 
     .about-title {
