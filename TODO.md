@@ -11,7 +11,7 @@ This file tracks site tasks and their status.
 
 ## Requested Site Updates
 
-- [ ] Improve upcoming gig formatting; decide whether to include venue and timings
+- [x] Improve upcoming gig formatting (band / event / venue + time; compact previous gigs; CMS fields updated)
 - [x] Remove pictures from the About page
 - [x] Decide whether to remove the header from the home page
 - [x] Make mobile text slightly smaller and left-aligned where narrow wrapping leaves only a few words per line
@@ -26,6 +26,8 @@ This file tracks site tasks and their status.
 - [ ] Update the About description to mention performances at Ronnie Scott's, Cadogan, 606 Club, and Cafe OTO
 
 - [x] Add image carousel (desktop buttons, mobile swipe), hide nav on scroll down, smooth desktop scroll
+- [x] Carousel arrows pinned to screen edges; equal gallery gutters (scrollbar gutter); About retitled with Photography above NYJO
+- [ ] Fix srcset warnings for gallery filenames containing spaces or "&"
 
 ## Notes
 - Date of last update: 2026-10-01

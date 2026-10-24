@@ -12,42 +12,45 @@ import {
   splitAndSortGigs,
   todayInTimeZone,
 } from '../scripts/build-content.mjs';
+import { renderGigHtml } from '../js/cms-content.js';
 
 test('gigs move across the London date boundary and sort in opposite directions', () => {
   const result = splitAndSortGigs(
     [
-      { date: '2026-10-28', venue: 'Later show' },
-      { date: '2026-10-23', venue: 'Missed show' },
-      { date: '2026-10-24', venue: 'Today show' },
+      { date: '2026-10-28', band: 'Later show' },
+      { date: '2026-10-23', band: 'Missed show' },
+      { date: '2026-10-24', band: 'Today show' },
     ],
     [
-      { date: '2026-10-25', venue: 'Corrected future show' },
-      { date: '2026-10-20', venue: 'Older show' },
+      { date: '2026-10-25', band: 'Corrected future show' },
+      { date: '2026-10-20', band: 'Older show' },
     ],
     '2026-10-24',
   );
 
-  assert.deepEqual(result.upcoming.map(({ venue }) => venue), ['Today show', 'Corrected future show', 'Later show']);
-  assert.deepEqual(result.past.map(({ venue }) => venue), ['Missed show', 'Older show']);
+  assert.deepEqual(result.upcoming.map(({ band }) => band), ['Today show', 'Corrected future show', 'Later show']);
+  assert.deepEqual(result.past.map(({ band }) => band), ['Missed show', 'Older show']);
 });
 
 test('gig dates must be valid calendar dates', () => {
   assert.throws(
-    () => splitAndSortGigs([{ date: '2026-02-30', venue: 'Invalid date' }], [], '2026-02-01'),
+    () => splitAndSortGigs([{ date: '2026-02-30', band: 'Invalid date' }], [], '2026-02-01'),
     /invalid date "2026-02-30"/i,
   );
 });
 
 test('optional gig and gallery fields may be left blank in the CMS', () => {
   const gigs = splitAndSortGigs([
-    { date: '2026-10-25', venue: 'Test show', city: null, ticketLink: null, notes: null },
+    { date: '2026-10-25', band: 'Test show', event: null, venue: null, time: null, city: null, ticketLink: null },
   ], [], '2026-10-24');
   assert.deepEqual(gigs.upcoming[0], {
     date: '2026-10-25',
-    venue: 'Test show',
+    band: 'Test show',
+    event: '',
+    venue: '',
+    time: '',
     city: '',
     ticketLink: '',
-    notes: '',
   });
 
   assert.deepEqual(sortGalleryEntries([
@@ -64,6 +67,23 @@ test('optional gig and gallery fields may be left blank in the CMS', () => {
     gallery: 'other',
     alt: 'Test photo',
   }]);
+});
+
+test('gigs require a band name', () => {
+  assert.throws(
+    () => splitAndSortGigs([{ date: '2026-10-25', venue: 'No band' }], [], '2026-10-24'),
+    /missing a band name/i,
+  );
+});
+
+test('gig renderer shows time on upcoming gigs only and escapes text', () => {
+  const gig = { date: '2026-10-25', band: 'A & B', event: 'Festival', venue: 'Club', time: '19:30', city: 'London', ticketLink: '' };
+  const upcoming = renderGigHtml(gig, 'upcoming');
+  const previous = renderGigHtml(gig, 'previous');
+  assert.match(upcoming, /A &amp; B/);
+  assert.match(upcoming, /Club, London · 19:30/);
+  assert.doesNotMatch(previous, /19:30/);
+  assert.match(previous, /2026/);
 });
 
 test('same-day cutoff uses the configured local timezone', () => {

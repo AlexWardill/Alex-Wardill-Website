@@ -63,19 +63,28 @@ content:
         label: Date
         type: date
         required: true
+      - name: band
+        label: Band name
+        type: string
+        required: true
+      - name: event
+        label: Event (optional)
+        type: string
+        description: For example "Guildhall Jazz Festival" or "Album launch". Shown under the band name.
       - name: venue
         label: Venue
         type: string
-        required: true
+        description: Shown under the band name. Leave blank if there is no venue to show.
+      - name: time
+        label: Time (optional)
+        type: string
+        description: For example 19:30. Shown after the venue on upcoming gigs and hidden on previous gigs.
       - name: city
-        label: City
+        label: City (optional)
         type: string
       - name: ticketLink
-        label: Ticket link
+        label: Ticket link (optional)
         type: string
-      - name: notes
-        label: Notes
-        type: text
   - name: past_gigs
     label: Past gigs
     type: file
@@ -87,18 +96,28 @@ content:
         label: Date
         type: date
         required: true
+      - name: band
+        label: Band name
+        type: string
+        required: true
+      - name: event
+        label: Event (optional)
+        type: string
+        description: For example "Guildhall Jazz Festival" or "Album launch". Shown under the band name.
       - name: venue
         label: Venue
         type: string
-        required: true
+        description: Shown under the band name. Leave blank if there is no venue to show.
+      - name: time
+        label: Time (optional)
+        type: string
+        description: For example 19:30. Shown after the venue on upcoming gigs and hidden on previous gigs.
       - name: city
-        label: City
+        label: City (optional)
         type: string
       - name: ticketLink
-        label: Ticket link
+        label: Ticket link (optional)
         type: string
-      - name: notes
-        label: Notes
 settings:
   commit:
     templates:

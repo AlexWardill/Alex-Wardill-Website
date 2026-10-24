@@ -53,17 +53,59 @@ export function getUpcomingGigEntries(gigs = [], limit = Infinity) {
   return upcoming.slice(0, limit);
 }
 
-export function formatGigDate(dateString, { includeYear = true } = {}) {
-  const date = parseIsoDate(dateString);
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-  if (!date) {
+const GIG_ITEM_CLASSES = {
+  upcoming: 'gig-item upcoming-gig',
+  previous: 'gig-item gig-item-simple',
+  home: 'home-gig-item',
+};
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+export function formatGigDate(dateString, { includeYear = true } = {}) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dateString ?? '').trim());
+
+  if (!match) {
     return '';
   }
 
-  const day = date.getDate();
-  const month = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(date);
-  const suffix = ['th', 'st', 'nd', 'rd'][(day % 100 > 20 ? day % 10 : day % 20)] || 'th';
-  const year = includeYear ? ` ${date.getFullYear()}` : '';
+  const year = includeYear ? ` ${match[1]}` : '';
+  return `${Number(match[3])} ${MONTHS[Number(match[2]) - 1]}${year}`;
+}
 
-  return `${day}${suffix} ${month}${year}`;
+export function renderGigHtml(gig, variant) {
+  const isPrevious = variant === 'previous';
+  const place = [gig.venue, gig.city].filter(Boolean).join(', ');
+  const where = isPrevious ? place : [place, gig.time].filter(Boolean).join(' · ');
+  const details = [
+    `<div class="gig-band">${escapeHtml(gig.band)}</div>`,
+    gig.event ? `<div class="gig-event">${escapeHtml(gig.event)}</div>` : '',
+    where ? `<div class="gig-venue">${escapeHtml(where)}</div>` : '',
+  ].join('');
+  const date = escapeHtml(formatGigDate(gig.date, { includeYear: isPrevious }));
+  const body = `<div class="gig-main">${details}</div><div class="gig-date">${date}</div>`;
+  const classes = GIG_ITEM_CLASSES[variant];
+  const ticketLink = /^https?:\/\//i.test(gig.ticketLink ?? '') ? gig.ticketLink : '';
+
+  if (ticketLink) {
+    return `<a class="${classes} gig-item-clickable" href="${escapeHtml(ticketLink)}" target="_blank" rel="noopener noreferrer">${body}</a>`;
+  }
+
+  return `<div class="${classes}">${body}</div>`;
+}
+
+export function renderGigListHtml(gigs, variant) {
+  if (!gigs.length) {
+    return `<div class="${GIG_ITEM_CLASSES[variant]}"><div class="gig-main"><div class="gig-band">No gigs scheduled yet.</div></div><div class="gig-date">Check back soon</div></div>`;
+  }
+
+  return gigs.map((gig) => renderGigHtml(gig, variant)).join('\n');
 }

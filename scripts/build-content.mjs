@@ -5,6 +5,7 @@ import process from 'node:process';
 import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
 import convertHeic from 'heic-convert';
+import { renderGigListHtml } from '../js/cms-content.js';
 
 const rootDir = process.cwd();
 const timeZone = process.env.GIGS_TIME_ZONE || 'Europe/London';
@@ -14,6 +15,7 @@ const upcomingGigsPath = path.join(rootDir, 'content', 'gigs-upcoming.json');
 const pastGigsPath = path.join(rootDir, 'content', 'gigs-past.json');
 const cmsGigDataPath = path.join(rootDir, 'data', 'cms-content.json');
 const gigsHtmlPath = path.join(rootDir, 'gigs', 'index.html');
+const homeHtmlPath = path.join(rootDir, 'index.html');
 const galleryOriginalsPath = path.join(rootDir, '_uploads', 'gallery');
 const galleryOptimizedPath = path.join(rootDir, 'images', 'optimized', 'gallery');
 const imageManifestPath = path.join(rootDir, '_uploads', '.gallery-image-manifest.json');
@@ -29,7 +31,9 @@ const GALLERY_ORDER = ['portraits', 'gigs', 'siena', 'other'];
 const GIG_MARKERS = {
   upcoming: ['<!-- upcoming-gigs:auto:start -->', '<!-- upcoming-gigs:auto:end -->'],
   past: ['<!-- previous-gigs:auto:start -->', '<!-- previous-gigs:auto:end -->'],
+  home: ['<!-- home-gigs:auto:start -->', '<!-- home-gigs:auto:end -->'],
 };
+const HOME_GIG_LIMIT = 5;
 
 function isValidIsoDate(value) {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
@@ -64,22 +68,26 @@ function normalizeGig(entry, sourceName, index) {
   if (!isValidIsoDate(entry.date)) {
     throw new Error(`${sourceName} entry ${index + 1} has an invalid date "${entry.date ?? ''}". Expected YYYY-MM-DD.`);
   }
-  if (typeof entry.venue !== 'string' || !entry.venue.trim()) {
-    throw new Error(`${sourceName} entry ${index + 1} is missing a venue.`);
+  if (typeof entry.band !== 'string' || !entry.band.trim()) {
+    throw new Error(`${sourceName} entry ${index + 1} is missing a band name.`);
   }
 
-  for (const field of ['city', 'ticketLink', 'notes']) {
+  for (const field of ['event', 'venue', 'time', 'city', 'ticketLink']) {
     if (entry[field] !== undefined && entry[field] !== null && typeof entry[field] !== 'string') {
       throw new Error(`${sourceName} entry ${index + 1} field "${field}" must be text.`);
     }
   }
 
+  const text = (field) => (typeof entry[field] === 'string' ? entry[field].trim() : '');
+
   return {
     date: entry.date,
-    venue: entry.venue.trim(),
-    city: typeof entry.city === 'string' ? entry.city.trim() : '',
-    ticketLink: typeof entry.ticketLink === 'string' ? entry.ticketLink.trim() : '',
-    notes: typeof entry.notes === 'string' ? entry.notes.trim() : '',
+    band: entry.band.trim(),
+    event: text('event'),
+    venue: text('venue'),
+    time: text('time'),
+    city: text('city'),
+    ticketLink: text('ticketLink'),
     sourceIndex: index,
   };
 }
@@ -296,7 +304,7 @@ function replaceGigMarkerBlock(html, [startMarker, endMarker], markup) {
   const startIndex = html.indexOf(startMarker);
   const endIndex = html.indexOf(endMarker, startIndex + startMarker.length);
   if (startIndex < 0 || endIndex < 0) {
-    throw new Error(`Gigs page is missing markers "${startMarker}" and "${endMarker}".`);
+    throw new Error(`Page is missing markers "${startMarker}" and "${endMarker}".`);
   }
 
   const newline = html.includes('\r\n') ? '\r\n' : '\n';
@@ -304,31 +312,8 @@ function replaceGigMarkerBlock(html, [startMarker, endMarker], markup) {
   return `${html.slice(0, startIndex + startMarker.length)}${newline}${generatedMarkup}${newline}                ${html.slice(endIndex)}`;
 }
 
-function ordinal(day) {
-  if (day % 100 >= 11 && day % 100 <= 13) return 'th';
-  switch (day % 10) {
-    case 1: return 'st';
-    case 2: return 'nd';
-    case 3: return 'rd';
-    default: return 'th';
-  }
-}
-
-function formatGigDate(value) {
-  const [year, month, day] = value.split('-').map(Number);
-  const date = new Date(Date.UTC(year, month - 1, day, 12));
-  const monthName = new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(date);
-  return `${day}${ordinal(day)} ${monthName} ${year}`;
-}
-
-function renderGig(gig, isUpcoming) {
-  const classes = isUpcoming ? 'gig-item upcoming-gig' : 'gig-item gig-item-simple';
-  const city = gig.city ? `<span class="gig-city"> — ${htmlEscape(gig.city)}</span>` : '';
-  const notes = gig.notes ? `<div class="gig-notes">${htmlEscape(gig.notes)}</div>` : '';
-  return `                <div class="${classes}" data-ticket-link="${htmlEscape(gig.ticketLink)}">
-                    <div class="gig-venue">${htmlEscape(gig.venue)}${city}${notes}</div>
-                    <div class="gig-date">${formatGigDate(gig.date)}</div>
-                </div>`;
+function indentLines(markup, spaces) {
+  return markup.split('\n').map((line) => ' '.repeat(spaces) + line).join('\n');
 }
 
 async function collectImageFiles(directory) {
@@ -475,23 +460,15 @@ async function buildGigs() {
   await fs.writeFile(upcomingGigsPath, `${JSON.stringify(upcoming, null, 2)}\n`, 'utf8');
   await fs.writeFile(pastGigsPath, `${JSON.stringify(past, null, 2)}\n`, 'utf8');
 
-  const cmsGigs = [...upcoming, ...past].map((gig) => {
-    const separator = gig.venue.lastIndexOf(' @ ');
-    return {
-      title: separator < 0 ? gig.venue : gig.venue.slice(0, separator),
-      venue: separator < 0 ? '' : gig.venue.slice(separator + 3),
-      date: gig.date,
-      ticketUrl: gig.ticketLink,
-      notes: gig.notes,
-      city: gig.city,
-    };
-  });
-  await fs.writeFile(cmsGigDataPath, `${JSON.stringify({ gigs: cmsGigs }, null, 2)}\n`, 'utf8');
+  await fs.writeFile(cmsGigDataPath, `${JSON.stringify({ gigs: [...upcoming, ...past] }, null, 2)}\n`, 'utf8');
 
   let html = await fs.readFile(gigsHtmlPath, 'utf8');
-  html = replaceGigMarkerBlock(html, GIG_MARKERS.upcoming, upcoming.map((gig) => renderGig(gig, true)).join('\n'));
-  html = replaceGigMarkerBlock(html, GIG_MARKERS.past, past.map((gig) => renderGig(gig, false)).join('\n'));
+  html = replaceGigMarkerBlock(html, GIG_MARKERS.upcoming, indentLines(renderGigListHtml(upcoming, 'upcoming'), 16));
+  html = replaceGigMarkerBlock(html, GIG_MARKERS.past, indentLines(renderGigListHtml(past, 'previous'), 16));
   await fs.writeFile(gigsHtmlPath, html, 'utf8');
+
+  const homeHtml = await fs.readFile(homeHtmlPath, 'utf8');
+  await fs.writeFile(homeHtmlPath, replaceGigMarkerBlock(homeHtml, GIG_MARKERS.home, indentLines(renderGigListHtml(upcoming.slice(0, HOME_GIG_LIMIT), 'home'), 16)), 'utf8');
   console.log(`Built gigs page: ${upcoming.length} upcoming, ${past.length} past.`);
 }
 

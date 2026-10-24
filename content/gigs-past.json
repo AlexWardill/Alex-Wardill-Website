@@ -1,135 +1,182 @@
 [
   {
-    "date": "2026-10-20",
-    "venue": "Late Late Show Upstairs With Miles Pillinger @ Ronnie Scott's",
+    "date": "2026-10-24",
+    "band": "Ruta Di",
+    "event": "\"Onwards & Upwards\" Album Launch",
+    "venue": "Jazz Cafe Posk",
+    "time": "",
     "city": "",
-    "ticketLink": "https://www.ronniescotts.co.uk/find-a-show/late-late-show-upstairs-miles-pillinger",
-    "notes": "Upstairs, with Miles Pillinger"
+    "ticketLink": ""
+  },
+  {
+    "date": "2026-10-20",
+    "band": "Miles Pillinger",
+    "event": "Late Late Show Upstairs",
+    "venue": "Ronnie Scott's",
+    "time": "",
+    "city": "",
+    "ticketLink": "https://www.ronniescotts.co.uk/find-a-show/late-late-show-upstairs-miles-pillinger"
   },
   {
     "date": "2026-10-18",
-    "venue": "Miles Pillinger @ The Lab",
+    "band": "Miles Pillinger",
+    "event": "",
+    "venue": "The Lab",
+    "time": "",
     "city": "Cambridge",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-07-21",
-    "venue": "Composers Workshop Big Band @ The Vortex",
+    "band": "Composers Workshop Big Band",
+    "event": "",
+    "venue": "The Vortex",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-06-23",
-    "venue": "Evelyn @ The Vortex",
+    "band": "Evelyn",
+    "event": "",
+    "venue": "The Vortex",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-05-14",
-    "venue": "Jess Bull Anderson @ Karamel",
+    "band": "Jess Bull Anderson",
+    "event": "",
+    "venue": "Karamel",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-05-13",
-    "venue": "Evelyn @ Green Note",
+    "band": "Evelyn",
+    "event": "",
+    "venue": "Green Note",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-04-23",
-    "venue": "Hana Amaya @ Roundhouse Resident Artist Showcase",
+    "band": "Hana Amaya",
+    "event": "Resident Artist Showcase",
+    "venue": "Roundhouse",
+    "time": "",
     "city": "",
-    "ticketLink": "https://www.roundhouse.org.uk/whats-on/ra-music-2/",
-    "notes": ""
+    "ticketLink": "https://www.roundhouse.org.uk/whats-on/ra-music-2/"
   },
   {
     "date": "2026-02-26",
-    "venue": "Evelyn @ Puppet Barge Theatre",
+    "band": "Evelyn",
+    "event": "",
+    "venue": "Puppet Barge Theatre",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-02-24",
-    "venue": "Permutations @ George Tavern",
+    "band": "Permutations",
+    "event": "",
+    "venue": "George Tavern",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-02-16",
-    "venue": "Permutations @ Windmill Brixton",
+    "band": "Permutations",
+    "event": "",
+    "venue": "Windmill Brixton",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-02-14",
-    "venue": "NYJO feat. Jasmine Myra @ Cambridge Arts Center",
+    "band": "NYJO feat. Jasmine Myra",
+    "event": "",
+    "venue": "Cambridge Arts Center",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2026-02-06",
-    "venue": "Composers Workshop Big Band @ Vortex Jazz club",
+    "band": "Composers Workshop Big Band",
+    "event": "",
+    "venue": "Vortex Jazz club",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-12-10",
-    "venue": "ILANJO @ Next Door Records Shepherd's Bush",
+    "band": "ILANJO",
+    "event": "",
+    "venue": "Next Door Records Shepherd's Bush",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-11-18",
-    "venue": "Sara Dhillon Quintet @ EFG London Jazz Festival",
+    "band": "Sara Dhillon Quintet",
+    "event": "EFG London Jazz Festival",
+    "venue": "",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-11-16",
-    "venue": "Adam Bloor Quartet @ Old Ivyhouse Jazz Festival",
+    "band": "Adam Bloor Quartet",
+    "event": "Old Ivyhouse Jazz Festival",
+    "venue": "",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-11-02",
-    "venue": "London Jazz Orchestra",
+    "band": "London Jazz Orchestra",
+    "event": "",
+    "venue": "",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-10-05",
-    "venue": "Bill Dixon Index Orchestra",
+    "band": "Bill Dixon Index Orchestra",
+    "event": "",
+    "venue": "",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-09-05",
-    "venue": "Sonido Minivan",
+    "band": "Sonido Minivan",
+    "event": "",
+    "venue": "",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   },
   {
     "date": "2025-07-04",
-    "venue": "NYJO feat. Jas Kayser @ Peckham Levels",
+    "band": "NYJO feat. Jas Kayser",
+    "event": "",
+    "venue": "Peckham Levels",
+    "time": "",
     "city": "",
-    "ticketLink": "",
-    "notes": ""
+    "ticketLink": ""
   }
 ]
