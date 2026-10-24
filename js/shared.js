@@ -1,4 +1,11 @@
 (() => {
+    const isHomePage = document.body.classList.contains('home-page');
+    if (isHomePage) {
+        window.history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+        window.addEventListener('pageshow', () => window.scrollTo(0, 0));
+    }
+
     const { pathname, search, hash } = window.location;
     if (pathname.endsWith('.html')) {
         const normalizedPath = pathname.endsWith('/index.html')
@@ -42,6 +49,11 @@
             }
 
             event.preventDefault();
+            if (isHomePage && targetSelector === '#home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+
             target.scrollIntoView({ behavior: 'smooth' });
         });
     });
