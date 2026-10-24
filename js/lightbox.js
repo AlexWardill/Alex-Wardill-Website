@@ -30,12 +30,20 @@
     };
 
     fetch('image_data.json')
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Could not load image descriptions (${response.status}).`);
+            }
+            return response.json();
+        })
         .then((data) => {
             imageData = data;
+            if (lightbox.classList.contains('active')) {
+                updateLightboxContent();
+            }
         })
-        .catch(() => {
-            imageData = {};
+        .catch((error) => {
+            console.error('Failed to load image descriptions:', error);
         });
 
     const updateLightboxContent = () => {
@@ -47,11 +55,7 @@
         lightboxCaption.textContent = currentImage.getAttribute('data-caption') || '';
         lightboxSection.textContent = sectionDisplayNames[section] || 'Photos';
 
-        if (imageData[section] && imageData[section][imageName]) {
-            lightboxLocation.innerHTML = imageData[section][imageName].replace(/\n/g, '<br>');
-        } else {
-            lightboxLocation.textContent = '';
-        }
+        lightboxLocation.textContent = imageData[section]?.[imageName] || '';
     };
 
     const openLightbox = (index) => {

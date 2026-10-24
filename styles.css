@@ -336,6 +336,15 @@ body {
     letter-spacing: 0.5px;
 }
 
+.gig-city,
+.gig-notes {
+    display: block;
+    margin-top: 0.3rem;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
 .gig-item-simple .gig-venue {
     margin-bottom: 0;
     text-align: left;
@@ -856,6 +865,7 @@ body {
 #lightbox-location {
     font-size: 0.9rem;
     color: #999;
+    white-space: pre-line;
 }
 
 .lightbox-prev,

@@ -1,11 +1,15 @@
 # Node modules
 node_modules/
 
+# Generated site output
+_site/
+.jekyll-cache/
+
 # Environment files
 .env
 .env.*
 
-# Google credentials / secrets
+# Credentials and secrets
 *credentials*.json
 *client_secret*.json
 *oauth*.json

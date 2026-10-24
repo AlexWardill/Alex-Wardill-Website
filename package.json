@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "sync:gigs": "node scripts/sync-gigs-from-calendar.mjs",
-    "sync:gigs:dry-run": "node scripts/sync-gigs-from-calendar.mjs --dry-run",
-    "auth:google:refresh-token": "node scripts/generate-google-refresh-token.mjs"
+    "build": "node scripts/build-content.mjs",
+    "test": "node --test"
   },
   "dependencies": {
-    "googleapis": "^144.0.0"
+    "heic-convert": "^2.1.0",
+    "sharp": "^0.34.4"
   }
 }

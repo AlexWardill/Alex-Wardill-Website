@@ -1,0 +1,12 @@
+exclude:
+  - _uploads/
+  - content/
+  - scripts/
+  - tests/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - README.md
+  - .pages.yml
+  - .github/
+  - docs/
