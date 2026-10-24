@@ -5,7 +5,7 @@ media:
     label: Gallery uploads
     input: _uploads/gallery
     output: /images/optimized/gallery
-    extensions: [jpg, jpeg, png, webp, heic, heif]
+    extensions: [jpg, jpeg, png, webp, heic, heif, JPG, JPEG, PNG, WEBP, HEIC, HEIF]
     rename: false
     categories: [image]
 
