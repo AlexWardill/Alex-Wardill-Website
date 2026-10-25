@@ -874,6 +874,12 @@ main > .gigs-section:first-child {
     outline-offset: 3px;
 }
 
+.gallery-back-bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
 /* Gallery Section */
 .gallery-section {
     background-color: #ffffff;
@@ -979,6 +985,15 @@ main > .gigs-section:first-child {
         gap: 0.25rem;
         padding: 0.3rem 0.55rem;
         font-size: 0.75rem;
+    }
+
+    .gallery-back-bottom {
+        margin-top: 2rem;
+    }
+
+    .gallery-back-bottom .gallery-back-button {
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
     }
 
     .gallery-back-full {
