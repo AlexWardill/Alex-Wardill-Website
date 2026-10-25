@@ -179,8 +179,8 @@
         lightboxImage.style.opacity = '';
     };
 
-    const slideToNext = (direction) => {
-        const distance = Math.round(window.innerWidth * 0.5) * -direction;
+    const slideToNext = (direction, fromDx = 0) => {
+        const distance = Math.max(Math.round(window.innerWidth * 0.5), Math.abs(fromDx)) * -direction;
         lightboxImage.style.transition = slideTransition;
         lightboxImage.style.transform = 'translateX(' + distance + 'px)';
         lightboxImage.style.opacity = '0';
@@ -239,9 +239,7 @@
             if (event.type === 'pointercancel') {
                 resetImagePosition();
             } else if (dragAxis === 'x' && Math.abs(dx) > 50 && galleryItems.length > 1) {
-                lightboxImage.style.transform = '';
-                lightboxImage.style.opacity = '';
-                slideToNext(dx < 0 ? 1 : -1);
+                slideToNext(dx < 0 ? 1 : -1, dx);
             } else if (dragAxis === 'y' && dy > 100) {
                 closeLightbox();
             } else {
