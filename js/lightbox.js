@@ -161,7 +161,7 @@
         if (!lightbox.classList.contains('active')) {
             lightbox.classList.add('active');
             lightbox.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+            lockScroll();
             closeButton?.focus({ preventScroll: true });
         }
     };
@@ -256,12 +256,38 @@
         lightboxImage.addEventListener('pointercancel', endDrag);
     };
 
+    let lockedScrollY = 0;
+
+    const lockScroll = () => {
+        const body = document.body;
+        lockedScrollY = window.scrollY;
+        body.style.position = 'fixed';
+        body.style.top = (-lockedScrollY) + 'px';
+        body.style.left = '0';
+        body.style.right = '0';
+        body.style.width = '100%';
+        body.style.overflow = 'hidden';
+    };
+
+    const unlockScroll = () => {
+        const body = document.body;
+        body.style.position = '';
+        body.style.top = '';
+        body.style.left = '';
+        body.style.right = '';
+        body.style.width = '';
+        body.style.overflow = '';
+        window.scrollTo({ top: lockedScrollY, behavior: 'instant' });
+    };
+
+    lightbox.addEventListener('touchmove', (event) => event.preventDefault(), { passive: false });
+
     const closeLightbox = () => {
         resetImagePosition();
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        galleryItems[currentIndex]?.focus();
+        unlockScroll();
+        galleryItems[currentIndex]?.focus({ preventScroll: true });
     };
 
     Promise.all([imageDataRequest, cmsDataRequest]).then(([staticData, cmsData]) => {
