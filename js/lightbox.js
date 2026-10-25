@@ -195,6 +195,12 @@
         }, 150);
     };
 
+    const AXIS_LOCK_DISTANCE = 14;
+    const VERTICAL_BIAS = 1.8;
+    const SWIPE_DISTANCE = 50;
+    const CLOSE_DISTANCE = 160;
+    const CLOSE_VERTICAL_BIAS = 2;
+
     const enableSwipe = () => {
         let startX = 0;
         let startY = 0;
@@ -215,15 +221,12 @@
             if (event.pointerId !== pointerId) return;
             const dx = event.clientX - startX;
             const dy = event.clientY - startY;
-            if (!axis && Math.max(Math.abs(dx), Math.abs(dy)) > 8) {
-                axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+            if (!axis && Math.max(Math.abs(dx), Math.abs(dy)) > AXIS_LOCK_DISTANCE) {
+                axis = Math.abs(dy) > Math.abs(dx) * VERTICAL_BIAS ? 'y' : 'x';
                 lightboxImage.classList.add('is-dragging');
             }
             if (axis === 'x' && galleryItems.length > 1) {
                 lightboxImage.style.transform = 'translateX(' + dx + 'px)';
-            } else if (axis === 'y' && dy > 0) {
-                lightboxImage.style.transform = 'translateY(' + dy + 'px)';
-                lightboxImage.style.opacity = String(Math.max(0.3, 1 - dy / 400));
             }
         });
 
@@ -238,9 +241,9 @@
 
             if (event.type === 'pointercancel') {
                 resetImagePosition();
-            } else if (dragAxis === 'x' && Math.abs(dx) > 50 && galleryItems.length > 1) {
+            } else if (dragAxis === 'x' && Math.abs(dx) > SWIPE_DISTANCE && galleryItems.length > 1) {
                 slideToNext(dx < 0 ? 1 : -1, dx);
-            } else if (dragAxis === 'y' && dy > 100) {
+            } else if (dragAxis === 'y' && dy > CLOSE_DISTANCE && dy > Math.abs(dx) * CLOSE_VERTICAL_BIAS) {
                 closeLightbox();
             } else {
                 lightboxImage.style.transition = slideTransition;

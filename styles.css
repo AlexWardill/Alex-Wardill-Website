@@ -25,6 +25,7 @@ html {
 
 html:has(.lightbox.active) {
     background-color: #0d0d0d;
+    overscroll-behavior: none;
 }
 
 .sr-only {
@@ -1247,6 +1248,8 @@ main > .gigs-section:first-child {
     justify-content: center;
     flex-direction: column;
     -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 .lightbox.active {
