@@ -6,6 +6,10 @@ import path from 'node:path';
 import sharp from 'sharp';
 import {
   GALLERY_PAGES,
+  buildSrcset,
+  encodePublicPath,
+  ensureResponsiveVariants,
+  responsiveBasePath,
   optimizeGalleryImages,
   publicGalleryImagePath,
   sortGalleryEntries,
@@ -167,6 +171,39 @@ test('image optimization resizes new or changed uploads only', async () => {
     const changedRun = await optimizeGalleryImages({ sourceRoot, outputRoot, manifestPath });
     assert.deepEqual(changedRun, { processedCount: 1, unchangedCount: 0 });
     assert.equal((await sharp(path.join(outputRoot, 'test-photo.jpg')).metadata()).height, 2560);
+  } finally {
+    await fs.rm(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test('public paths are URL-encoded per segment so spaces and ampersands survive srcset', () => {
+  assert.equal(encodePublicPath('/images/optimized/Gallery/Gigs/orchard-37 2-800.webp'), '/images/optimized/Gallery/Gigs/orchard-37%202-800.webp');
+  assert.equal(encodePublicPath('/images/a&b/x.webp'), '/images/a%26b/x.webp');
+});
+
+test('responsive base paths keep optimized images in place and map others under optimized', () => {
+  assert.equal(responsiveBasePath('/images/Gallery/Gigs/x.jpg'), '/images/optimized/Gallery/Gigs/x');
+  assert.equal(responsiveBasePath('/images/optimized/gallery/y.webp'), '/images/optimized/gallery/y');
+});
+
+test('responsive variants skip widths the source cannot fill and always emit a lightbox image', async () => {
+  sharp.cache(false);
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), 'variants-'));
+  try {
+    const sourcePath = path.join(tempRoot, 'wide photo.jpg');
+    await sharp({ create: { width: 1000, height: 500, channels: 3, background: '#cc3333' } }).jpeg().toFile(sourcePath);
+    const basePath = path.join(tempRoot, 'out', 'wide photo');
+
+    const { grid, lightbox } = await ensureResponsiveVariants(sourcePath, basePath);
+    assert.deepEqual(grid.map(({ suffix, width }) => [suffix, width]), [['400', 400], ['800', 800]]);
+    assert.equal(lightbox.width, 1000);
+    await fs.access(basePath + '-lightbox.webp');
+    await assert.rejects(fs.access(basePath + '-1200.webp'));
+
+    assert.equal(
+      buildSrcset('/images/optimized/wide photo', grid),
+      '/images/optimized/wide%20photo-400.webp 400w, /images/optimized/wide%20photo-800.webp 800w',
+    );
   } finally {
     await fs.rm(tempRoot, { recursive: true, force: true });
   }

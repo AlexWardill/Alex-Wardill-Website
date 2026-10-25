@@ -132,7 +132,7 @@
 
         const section = currentImage.getAttribute('data-section') || '';
         const imageSrc = getFullSizeSrc(currentImage);
-        const imageName = imageSrc.split('/').pop() || '';
+        const imageName = currentImage.getAttribute('data-name') || decodeURIComponent(imageSrc.split('/').pop() || '');
         const dataSection = section === 'photography' ? 'photography' : section;
         const matchingData = imageData[dataSection]
             || Object.values(imageData).find((sectionData) => sectionData && sectionData[imageName]);

@@ -27,7 +27,7 @@ This file tracks site tasks and their status.
 
 - [x] Add image carousel (desktop buttons, mobile swipe), hide nav on scroll down, smooth desktop scroll
 - [x] Carousel arrows pinned to screen edges; equal gallery gutters (scrollbar gutter); About retitled with Photography above NYJO
-- [ ] Fix srcset warnings for gallery filenames containing spaces or "&"
+- [x] Responsive images: URL-encoded srcsets, 400/800/1200 WebP variants for every gallery, home, photography and About image, ≤1800px lightbox variants, CMS uploads get variants automatically
 
 ## Notes
 - Date of last update: 2026-10-01

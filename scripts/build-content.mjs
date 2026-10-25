@@ -245,18 +245,6 @@ function replaceGalleryGrid(html, markup) {
   return `${html.slice(0, openTag.index)}${generated}${html.slice(endIndex)}`;
 }
 
-async function hasWebpVariant(publicPath) {
-  if (path.posix.extname(publicPath).toLowerCase() === '.webp') {
-    return null;
-  }
-
-  const withoutExtension = publicPath.replace(/\.[^.\/]+$/, '');
-  const webpPath = `${withoutExtension}.webp`;
-  const diskPath = path.join(rootDir, webpPath.replace(/^\/+/, ''));
-
-  return await fileExists(diskPath) ? webpPath : null;
-}
-
 async function fileExists(filePath) {
   try {
     await fs.access(filePath);
@@ -267,36 +255,82 @@ async function fileExists(filePath) {
   }
 }
 
+export const GRID_WIDTHS = [400, 800, 1200];
+export const LIGHTBOX_LONG_EDGE = 1800;
+const VARIANT_WEBP_OPTIONS = { quality: 80, effort: 5 };
+const GALLERY_SIZES = '(max-width: 768px) calc(100vw - 2rem), (max-width: 972px) 45vw, (max-width: 1275px) 29vw, (max-width: 1523px) 23vw, 342px';
+
+export function encodePublicPath(publicPath) {
+  return publicPath.split('/').map(encodeURIComponent).join('/');
+}
+
+export function responsiveBasePath(publicImagePath) {
+  const withoutExtension = publicImagePath.replace(/\.[^./]+$/, '');
+  return withoutExtension.startsWith('/images/optimized/')
+    ? withoutExtension
+    : withoutExtension.replace(/^\/images\//, '/images/optimized/');
+}
+
+async function variantDimensions(file) {
+  const { width, height } = await sharp(file).metadata();
+  return { width, height };
+}
+
+export async function ensureResponsiveVariants(sourcePath, basePath) {
+  const metadata = await sharp(sourcePath).metadata();
+  const sourceWidth = metadata.orientation >= 5 ? metadata.height : metadata.width;
+  if (!sourceWidth) {
+    throw new Error(`Could not read image dimensions for ${sourcePath}.`);
+  }
+
+  await fs.mkdir(path.dirname(basePath), { recursive: true });
+  const grid = [];
+  for (const width of GRID_WIDTHS) {
+    const file = `${basePath}-${width}.webp`;
+    if (!await fileExists(file)) {
+      if (width >= sourceWidth) continue;
+      await sharp(sourcePath).rotate().resize({ width }).webp(VARIANT_WEBP_OPTIONS).toFile(file);
+    }
+    grid.push({ suffix: String(width), ...await variantDimensions(file) });
+  }
+
+  const lightboxFile = `${basePath}-lightbox.webp`;
+  if (!await fileExists(lightboxFile)) {
+    await sharp(sourcePath)
+      .rotate()
+      .resize({ width: LIGHTBOX_LONG_EDGE, height: LIGHTBOX_LONG_EDGE, fit: 'inside', withoutEnlargement: true })
+      .webp(VARIANT_WEBP_OPTIONS)
+      .toFile(lightboxFile);
+  }
+
+  return { grid, lightbox: { suffix: 'lightbox', ...await variantDimensions(lightboxFile) } };
+}
+
+export function buildSrcset(basePath, grid) {
+  const seen = new Set();
+  return grid
+    .filter(({ width }) => !seen.has(width) && seen.add(width))
+    .map(({ suffix, width }) => `${htmlEscape(encodePublicPath(`${basePath}-${suffix}.webp`))} ${width}w`)
+    .join(', ');
+}
+
 async function renderGalleryImage(entry) {
   const publicImagePath = publicGalleryImagePath(entry.image);
   const diskPath = path.join(rootDir, publicImagePath.replace(/^\/+/, ''));
   if (!await fileExists(diskPath)) {
     throw new Error(`Gallery image is missing its published file: ${publicImagePath}`);
   }
-  const isCmsUpload = publicImagePath.startsWith('/images/optimized/gallery/');
-  const fullImagePath = isCmsUpload ? publicImagePath : entry.image;
-  let displayImagePath = publicImagePath;
-  let srcSet = '';
 
-  if (isCmsUpload) {
-    displayImagePath = await hasWebpVariant(publicImagePath) ?? publicImagePath;
-  } else {
-    const optimizedBase = publicImagePath.replace(/^\/images\//, '/images/optimized/').replace(/\.[^.]+$/, '');
-    const optimizedSmall = `${optimizedBase}-400.webp`;
-    const optimizedLarge = `${optimizedBase}-800.webp`;
-    const smallDiskPath = path.join(rootDir, optimizedSmall.replace(/^\/+/, ''));
-    const largeDiskPath = path.join(rootDir, optimizedLarge.replace(/^\/+/, ''));
-    if (await fileExists(largeDiskPath)) {
-      displayImagePath = optimizedLarge;
-      if (await fileExists(smallDiskPath)) {
-        srcSet = ` srcset="${htmlEscape(optimizedSmall)} 400w, ${htmlEscape(optimizedLarge)} 800w" sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 33vw"`;
-      }
-    } else if (await fileExists(smallDiskPath)) {
-      displayImagePath = optimizedSmall;
-    }
-  }
+  const basePath = responsiveBasePath(publicImagePath);
+  const { grid, lightbox } = await ensureResponsiveVariants(diskPath, path.join(rootDir, basePath.replace(/^\/+/, '')));
+  const fallback = grid.find(({ suffix }) => suffix === '800') ?? grid.at(-1) ?? lightbox;
+  const variantUrl = (variant) => htmlEscape(encodePublicPath(`${basePath}-${variant.suffix}.webp`));
+  const srcset = grid.length > 1
+    ? ` srcset="${buildSrcset(basePath, grid)}" sizes="${GALLERY_SIZES}"`
+    : '';
+  const name = path.posix.basename(publicImagePath);
 
-  const image = `<img src="${htmlEscape(displayImagePath)}" alt="${htmlEscape(entry.alt)}" data-caption="" data-section="${htmlEscape(entry.gallery)}" loading="lazy" decoding="async" data-full-src="${htmlEscape(fullImagePath)}"${srcSet}>`;
+  const image = `<img src="${variantUrl(fallback)}" alt="${htmlEscape(entry.alt)}" width="${fallback.width}" height="${fallback.height}" data-caption="" data-section="${htmlEscape(entry.gallery)}" data-name="${htmlEscape(name)}" loading="lazy" decoding="async" data-full-src="${variantUrl(lightbox)}"${srcset}>`;
   return `                <div class="gallery-item">${image}</div>`;
 }
 
@@ -391,6 +425,11 @@ export async function optimizeGalleryImages({
       await baseTransformer().webp({ quality: 82, effort: 5 }).toFile(webpPath);
     } else {
       await baseTransformer().webp({ quality: 82, effort: 5 }).toFile(targetPath);
+    }
+
+    const stem = targetPath.slice(0, -path.extname(targetPath).length);
+    for (const suffix of [...GRID_WIDTHS, 'lightbox']) {
+      await fs.rm(`${stem}-${suffix}.webp`, { force: true });
     }
 
     nextManifest[relativePath] = { digest, outputs: outputs.map((file) => path.relative(outputRoot, file).split(path.sep).join('/')) };
