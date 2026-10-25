@@ -17,7 +17,7 @@ const cmsGigDataPath = path.join(rootDir, 'data', 'cms-content.json');
 const gigsHtmlPath = path.join(rootDir, 'gigs', 'index.html');
 const homeHtmlPath = path.join(rootDir, 'index.html');
 const galleryOriginalsPath = path.join(rootDir, '_uploads', 'gallery');
-const galleryOptimizedPath = path.join(rootDir, 'images', 'optimized', 'gallery');
+const galleryOptimizedPath = path.join(rootDir, 'images', 'optimized', 'uploads');
 const imageManifestPath = path.join(rootDir, '_uploads', '.gallery-image-manifest.json');
 
 export const GALLERY_PAGES = {

@@ -139,8 +139,8 @@ test('galleries use the current production routes and keep Gigs in one list', ()
 
 test('HEIC uploads render through a JPEG fallback', () => {
   assert.equal(
-    publicGalleryImagePath('/images/optimized/gallery/phone-photo.heic'),
-    '/images/optimized/gallery/phone-photo.jpg',
+    publicGalleryImagePath('/images/optimized/uploads/phone-photo.heic'),
+    '/images/optimized/uploads/phone-photo.jpg',
   );
 });
 
@@ -183,7 +183,7 @@ test('public paths are URL-encoded per segment so spaces and ampersands survive 
 
 test('responsive base paths keep optimized images in place and map others under optimized', () => {
   assert.equal(responsiveBasePath('/images/Gallery/Gigs/x.jpg'), '/images/optimized/Gallery/Gigs/x');
-  assert.equal(responsiveBasePath('/images/optimized/gallery/y.webp'), '/images/optimized/gallery/y');
+  assert.equal(responsiveBasePath('/images/optimized/uploads/y.webp'), '/images/optimized/uploads/y');
 });
 
 test('responsive variants skip widths the source cannot fill and always emit a lightbox image', async () => {

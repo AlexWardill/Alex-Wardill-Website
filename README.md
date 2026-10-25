@@ -13,7 +13,7 @@ Static portfolio website with Pages CMS content management.
 
 - During testing, add the repository to Pages CMS and select the `develop` branch.
 - Gallery images are managed in one draggable list at `content/gallery-images.json`; existing routes under `/gallery-portraits/`, `/gallery-gigs/`, `/gallery-siena/`, and `/gallery-other/` are retained.
-- Upload JPG, JPEG, PNG, WebP, HEIC, or HEIF images through Gallery uploads. CMS originals are stored in `_uploads/gallery/` and excluded from publication; the build writes resized, public copies under `images/optimized/gallery/`.
+- Upload JPG, JPEG, PNG, WebP, HEIC, or HEIF images through Gallery uploads. CMS originals are stored in `_uploads/gallery/` and excluded from publication; the build writes resized, public copies under `images/optimized/uploads/`.
 - Image entries contain the gallery, alt text, and carousel description. Dragging controls order; the optional numeric order field is available for precise sorting.
 - Upcoming gigs and Past gigs are separate editable lists at `content/gigs-upcoming.json` and `content/gigs-past.json`. Build-time sorting uses the `Europe/London` date boundary and the current Gigs page layout.
 
