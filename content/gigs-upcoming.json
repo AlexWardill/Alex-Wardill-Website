@@ -3,18 +3,27 @@
     "date": "2026-11-21",
     "band": "The Hornsmen of the Apocalypse Big Band",
     "event": "Guildhall Jazz Festival",
+    "venue": "",
+    "time": "",
+    "city": "",
     "ticketLink": "https://www.gsmd.ac.uk/whats-on/guildhall-jazz-festival-the-hornsmen-of-the-apocalypse-big-band"
-  },
-  {
-    "date": "2026-12-06",
-    "band": "London Jazz Orchestra",
-    "event": "Vortex Jazz Ckub",
-    "ticketLink": "https://www.vortexjazz.co.uk/event/london-jazz-orchestra-with-the-essex-youth-jazz-orchestra/"
   },
   {
     "date": "2026-11-29",
     "band": "Permutations",
     "event": "The Old Blue Last",
+    "venue": "",
+    "time": "",
+    "city": "",
     "ticketLink": "https://link.dice.fm/q03227bc0c15?dice_id=q03227bc0c15"
+  },
+  {
+    "date": "2026-12-06",
+    "band": "London Jazz Orchestra",
+    "event": "Vortex Jazz Ckub",
+    "venue": "",
+    "time": "",
+    "city": "",
+    "ticketLink": "https://www.vortexjazz.co.uk/event/london-jazz-orchestra-with-the-essex-youth-jazz-orchestra/"
   }
 ]
